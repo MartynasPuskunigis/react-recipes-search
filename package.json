@@ -98,5 +98,8 @@
                 }
             }
         }
+    },
+    "dependencies": {
+        "simplr-flux": "^2.3.1"
     }
 }
