@@ -26,7 +26,7 @@ export class RecipesItemView extends React.Component<Props> {
                     <Link
                         to={{
                             pathname: `/recipe/${this.props.recipe.recipe_id}`,
-                            state: { recipe: this.props.recipe.title }
+                            state: { recipe: this.props.recipe }
                         }}
                     >
                         View Recipe

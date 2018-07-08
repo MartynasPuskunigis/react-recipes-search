@@ -2,8 +2,7 @@ import { Dispatcher } from "simplr-flux";
 
 import { DataFetchedAction, FetchDataAction } from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
-
-const API_KEY = "fe84d20d640360b86c238664b6a333ff";
+import { API_KEY } from "./index";
 
 export namespace RecipesActionsCreators {
     export async function searchForRecipes(keyword: string): Promise<void> {
