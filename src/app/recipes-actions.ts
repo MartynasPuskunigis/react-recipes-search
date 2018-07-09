@@ -9,3 +9,11 @@ export class DataFetchedAction {
 }
 
 export class FetchDataAction {}
+
+export class ReassignActiveRecipeAction {
+    constructor(private id: number) {}
+
+    public get newRecipeId(): number {
+        return this.id;
+    }
+}

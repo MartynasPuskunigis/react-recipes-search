@@ -8,6 +8,7 @@ interface Props {
 }
 
 export class RecipesItemView extends React.Component<Props> {
+
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="recipes__box">
@@ -23,14 +24,7 @@ export class RecipesItemView extends React.Component<Props> {
                     </p>
                 </div>
                 <button className="recipe_buttons">
-                    <Link
-                        to={{
-                            pathname: `/recipe/${this.props.recipe.recipe_id}`,
-                            state: { recipe: this.props.recipe }
-                        }}
-                    >
-                        View Recipe
-                    </Link>
+                    <Link to={`/recipe/${this.props.recipe.recipe_id}`}>View Recipe</Link>
                 </button>
             </div>
         );

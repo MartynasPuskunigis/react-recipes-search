@@ -1,6 +1,6 @@
 import { Dispatcher } from "simplr-flux";
 
-import { DataFetchedAction, FetchDataAction } from "./recipes-actions";
+import { DataFetchedAction, FetchDataAction, ReassignActiveRecipeAction } from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
 import { API_KEY } from "./index";
 
@@ -13,5 +13,9 @@ export namespace RecipesActionsCreators {
         );
         const data: Recipes = await apiCall.json();
         Dispatcher.dispatch(new DataFetchedAction(data.recipes));
+    }
+
+    export function reassignNewActiveRecipe(id: number): void {
+        Dispatcher.dispatch(new ReassignActiveRecipeAction(id));
     }
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { HomeView } from "./home-view";
-import { ActiveRecipeView } from "./active-recipe-view";
+import { ActiveRecipeContainer } from "./../active-recipe-container";
 
 export class Router extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
@@ -10,7 +10,7 @@ export class Router extends React.Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" component={HomeView} exact />
-                    <Route path="/recipe/:id" component={ActiveRecipeView} />
+                    <Route path="/recipe/:id" component={ActiveRecipeContainer} />
                 </Switch>
             </BrowserRouter>
         );

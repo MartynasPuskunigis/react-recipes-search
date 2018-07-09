@@ -1,9 +1,12 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, RouteComponentProps } from "react-router-dom";
 import { Recipe } from "./../contracts/Recipe";
 
-interface Props {
+interface Params {
+    id: string;
+}
+
+interface Props extends RouteComponentProps<Params> {
     activeRecipe: Recipe;
 }
 
@@ -11,7 +14,7 @@ export class ActiveRecipeView extends React.Component<Props> {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="container">
-                {this.props.activeRecipe !== undefined && (
+                {this.props.activeRecipe != null && (
                     <div className="active-recipe">
                         <img className="active-recipe__img" src={this.props.activeRecipe.image_url} alt={this.props.activeRecipe.title} />
                         <h3 className="active-recipe__title">{this.props.activeRecipe.title}</h3>
