@@ -23,7 +23,6 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
     }
 
     public static calculateState(state: State, props: Props): State {
-        console.log(props.match);
         return {
             activeRecipe: RecipesMapStore.get(props.match.params.id)
         };

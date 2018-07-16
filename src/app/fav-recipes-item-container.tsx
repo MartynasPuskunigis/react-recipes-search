@@ -3,10 +3,9 @@ import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
 import { RecipesMapStore } from "./recipes-map-store";
-import { RecipesItemView } from "./components/recipes-item-view";
-//import { LoadingView } from "./components/loading-view";
 import { Recipe } from "./contracts/Recipe";
-import { FavRecipesReduceStore } from "./fav-recipes-store";
+import { FavRecipesItemView } from "./components/fav-recipe-item-view";
+import { RecipesReduceStore } from "./recipes-store";
 
 interface Props {
     recipeId: string;
@@ -17,15 +16,15 @@ interface State {
     favRecipes: string[];
 }
 
-class RecipesItemContainerClass extends React.Component<Props, State> {
+class FavRecipesItemContainerClass extends React.Component<Props, State> {
     public static getStores(): Container.StoresList {
-        return [RecipesMapStore, FavRecipesReduceStore];
+        return [RecipesMapStore, RecipesReduceStore];
     }
 
     public static calculateState(state: State, props: Props): State {
         return {
             recipe: RecipesMapStore.get(props.recipeId),
-            favRecipes: FavRecipesReduceStore.getState().favRecipes
+            favRecipes: RecipesReduceStore.getState().favoriteRecipes
         };
     }
 
@@ -38,7 +37,7 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite}/>;
+                    return <FavRecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite}/>;
                 }
             }
             case Abstractions.ItemStatus.NoData: {
@@ -54,4 +53,4 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
         }
     }
 }
-export const RecipesItemContainer = Container.create(RecipesItemContainerClass, { withProps: true });
+export const FavRecipesItemContainer = Container.create(FavRecipesItemContainerClass, { withProps: true });

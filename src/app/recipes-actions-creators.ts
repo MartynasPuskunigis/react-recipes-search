@@ -1,6 +1,12 @@
 import { Dispatcher } from "simplr-flux";
 
-import { RecipesIdsFetchedAction, RecipesIdsLoadStartedAction, ReassignActiveRecipeAction } from "./recipes-actions";
+import {
+    RecipesIdsFetchedAction,
+    RecipesIdsLoadStartedAction,
+    ReassignActiveRecipeAction,
+    AddRecipeToFavoriteListAction,
+    RemoveRecipeFromFavoriteListAction
+} from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
 import { API_KEY } from "./index";
 
@@ -22,5 +28,13 @@ export namespace RecipesActionsCreators {
 
     export function reassignNewActiveRecipe(id: string): void {
         Dispatcher.dispatch(new ReassignActiveRecipeAction(id));
+    }
+
+    export function addRecipeToFavourites(id: string): void {
+        Dispatcher.dispatch(new AddRecipeToFavoriteListAction(id));
+    }
+
+    export function removeRecipeFromFavourites(id: string): void {
+        Dispatcher.dispatch(new RemoveRecipeFromFavoriteListAction(id));
     }
 }

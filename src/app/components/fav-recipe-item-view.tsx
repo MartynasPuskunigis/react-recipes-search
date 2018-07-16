@@ -1,15 +1,16 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { RecipesActionsCreators } from "./../recipes-actions-creators";
 import { Recipe } from "./../contracts/Recipe";
+import { RecipesActionsCreators } from "./../recipes-actions-creators";
 
 interface Props {
     recipe: Recipe;
     isFavorite: boolean;
 }
 
-export class RecipesItemView extends React.Component<Props> {
+export class FavRecipesItemView extends React.Component<Props> {
+
     private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
         if (this.props.isFavorite) {
             RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
