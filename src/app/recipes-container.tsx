@@ -1,15 +1,14 @@
 import * as React from "react";
 import { Container } from "flux/utils";
 
-import { Recipe } from "./contracts/Recipe";
 import { RecipesReduceStore } from "./recipes-store";
-//import { RecipesActionsCreators } from "./recipes-actions-creators";
-import { RecipesItemView } from "./components/recipes-item-view";
-import { LoadingView } from "./components/loading-view";
+//import { LoadingView } from "./components/loading-view";
+import { Abstractions } from "simplr-flux";
+import { RecipesItemContainer } from "./recipes-item-container";
 
 interface State {
-    recipes: Recipe[];
-    isLoading: boolean;
+    recipes: string[];
+    status: Abstractions.ItemStatus;
 }
 
 class RecipesContainerClass extends React.Component<{}, State> {
@@ -18,29 +17,25 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public static calculateState(state: State): State {
+        const { recipes, status } = RecipesReduceStore.getState();
+
         return {
-            recipes: RecipesReduceStore.getState().recipes,
-            isLoading: RecipesReduceStore.getState().isLoading
+            status: status,
+            recipes: recipes
         };
     }
 
     public render(): JSX.Element | JSX.Element[] {
-        if (this.state.recipes === null || this.state.recipes === undefined) {
-            return <div>Nieko</div>;
+        if (this.state.status === Abstractions.ItemStatus.Pending) {
+            return <div>Loading...</div>;
         }
-        if (this.state.isLoading === true) {
-            return <LoadingView />;
-        } else {
-            let recipesList;
-            recipesList = this.state.recipes.map(recipe => <RecipesItemView  key={`recipe-item-${recipe.recipe_id}`} recipe={recipe} />);
-            return (
-                <div>
-                    <div className="container">
-                        <div className="row">{recipesList}</div>
-                    </div>
-                </div>
-            );
+        if (this.state.recipes == null || this.state.recipes.length === 0) {
+            return <div>No results found...</div>;
         }
+        const recipeList = this.state.recipes.map((recipeId, index) => (
+            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+        ));
+        return <div>{recipeList}</div>;
     }
 }
 export const RecipesContainer = Container.create(RecipesContainerClass);

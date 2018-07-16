@@ -1,19 +1,17 @@
-import { Recipe } from "./contracts/Recipe";
+export class RecipesIdsFetchedAction {
+    constructor(private recipes: string[]) {}
 
-export class DataFetchedAction {
-    constructor(private recipes: Recipe[]) {}
-
-    public get getRecipes(): Recipe[] {
+    public get getRecipes(): string[] {
         return this.recipes;
     }
 }
 
-export class FetchDataAction {}
+export class RecipesIdsLoadStartedAction {}
 
 export class ReassignActiveRecipeAction {
-    constructor(private id: number) {}
+    constructor(private id: string) {}
 
-    public get newRecipeId(): number {
+    public get newRecipeId(): string {
         return this.id;
     }
 }

@@ -1,41 +1,40 @@
-import { ReduceStore } from "simplr-flux";
+import { ReduceStore, Abstractions } from "simplr-flux";
 
-import { DataFetchedAction, FetchDataAction, ReassignActiveRecipeAction } from "./recipes-actions";
-import { Recipe } from "./contracts/Recipe";
+import { RecipesIdsFetchedAction, RecipesIdsLoadStartedAction, ReassignActiveRecipeAction } from "./recipes-actions";
 
 interface StoreState {
-    recipes: Recipe[];
-    isLoading: boolean;
-    activeRecipe: Recipe;
+    recipes: string[];
+    status: Abstractions.ItemStatus;
+    activeRecipe: string;
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
     constructor() {
         super();
-        this.registerAction(DataFetchedAction, this.onSearchBoxChanged.bind(this));
-        this.registerAction(FetchDataAction, this.onRecipesLoading.bind(this));
+        this.registerAction(RecipesIdsFetchedAction, this.onSearchBoxChanged.bind(this));
+        this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
     }
 
-    private onSearchBoxChanged(action: DataFetchedAction, state: StoreState): StoreState {
+    private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
         return {
             ...state,
             recipes: action.getRecipes,
-            isLoading: false
+            status: Abstractions.ItemStatus.Loaded
         };
     }
 
-    private onRecipesLoading(action: FetchDataAction, state: StoreState): StoreState {
+    private onRecipesLoading(action: RecipesIdsLoadStartedAction, state: StoreState): StoreState {
         const nextState = {
             ...state,
-            isLoading: true
+            status: Abstractions.ItemStatus.Pending
         };
         return nextState;
     }
 
     private onViewRecipeClick(action: ReassignActiveRecipeAction, state: StoreState): StoreState {
         for (let i = 0; i < state.recipes.length; i++) {
-            if (state.recipes[i].recipe_id === action.newRecipeId) {
+            if (state.recipes[i] === action.newRecipeId) {
                 return {
                     ...state,
                     activeRecipe: state.recipes[i]
@@ -50,17 +49,8 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
     public getInitialState(): StoreState {
         return {
             recipes: [],
-            isLoading: false,
-            activeRecipe: {
-                f2f_url: "",
-                image_url: "",
-                publisher: "",
-                publisher_url: "",
-                recipe_id: 0,
-                social_rank: 0,
-                source_url: "",
-                title: ""
-            }
+            status: Abstractions.ItemStatus.Init,
+            activeRecipe: ""
         };
     }
 }

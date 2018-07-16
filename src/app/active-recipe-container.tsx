@@ -1,63 +1,62 @@
 import * as React from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import { Container } from "flux/utils";
 
 import { Recipe } from "./contracts/Recipe";
-import { RecipesReduceStore } from "./recipes-store";
-import { RecipesActionsCreators } from "./recipes-actions-creators";
+import { RecipesMapStore } from "./recipes-map-store";
+import { Abstractions } from "simplr-flux";
+import { ActiveRecipeView } from "./components/active-recipe-view";
 
 interface Params {
-    id: number;
+    id: string;
 }
 
-interface Props extends RouteComponentProps<Params> {
-    activeRecipe: Recipe;
-}
+interface Props extends RouteComponentProps<Params> {}
 
 interface State {
-    activeRecipe: Recipe;
+    activeRecipe: Abstractions.Item<Recipe>;
 }
 
 class ActiveRecipeContainerClass extends React.Component<Props, State> {
-
     public static getStores(): Container.StoresList {
-        return [RecipesReduceStore];
+        return [RecipesMapStore];
     }
 
-    public static calculateState(state: State): State {
+    public static calculateState(state: State, props: Props): State {
+        console.log(props.match);
         return {
-            activeRecipe: RecipesReduceStore.getState().activeRecipe,
+            activeRecipe: RecipesMapStore.get(props.match.params.id)
         };
     }
 
-    public componentDidMount(): void {
-        RecipesActionsCreators.reassignNewActiveRecipe(this.props.match.params.id);
-    }
-
     public render(): JSX.Element | JSX.Element[] {
-        return (
-            <div className="container">
-                {this.state.activeRecipe != null && (
-                    <div className="active-recipe">
-                        <img className="active-recipe__img" src={this.state.activeRecipe.image_url} alt={this.state.activeRecipe.title} />
-                        <h3 className="active-recipe__title">{this.state.activeRecipe.title}</h3>
-                        <h4 className="active-recipe__publisher">
-                            Publisher: <span>{this.state.activeRecipe.publisher}</span>
-                        </h4>
-                        <p className="active-recipe__website">
-                            Website:
-                            <span>
-                                <a href={this.state.activeRecipe.publisher_url}>{this.state.activeRecipe.publisher_url}</a>
-                            </span>
-                        </p>
-                        <button className="active-recipe__button">
-                            <Link to="/">Go Home</Link>
-                        </button>
+        switch (this.state.activeRecipe.Status) {
+            case Abstractions.ItemStatus.Init: {
+                return <div>No data, initializing</div>;
+            }
+            case Abstractions.ItemStatus.Pending: {
+                return <div>Loading........</div>;
+            }
+            case Abstractions.ItemStatus.Loaded: {
+                if (this.state.activeRecipe.Value) {
+                    return <ActiveRecipeView recipeToDisplay={this.state.activeRecipe.Value} />;
+                }
+            }
+            case Abstractions.ItemStatus.NoData: {
+                return <div>No data.</div>;
+            }
+            case Abstractions.ItemStatus.Failed: {
+                return (
+                    <div>
+                        Failed to load...{" "}
+                        <span>
+                            <button>Retry...</button>
+                        </span>
                     </div>
-                )}
-            </div>
-        );
+                );
+            }
+        }
     }
 }
 
-export const ActiveRecipeContainer = Container.create(ActiveRecipeContainerClass);
+export const ActiveRecipeContainer = Container.create(ActiveRecipeContainerClass, { withProps: true });
