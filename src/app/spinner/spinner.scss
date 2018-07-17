@@ -1,7 +1,10 @@
 .lds-dual-ring {
     display: inline-block;
-    width: 64px;
-    height: 64px;
+    width: 310px;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .lds-dual-ring:after {
     content: " ";

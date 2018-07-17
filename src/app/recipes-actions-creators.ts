@@ -16,7 +16,7 @@ export namespace RecipesActionsCreators {
         try {
             const recipeName = keyword;
             const apiCall = await fetch(
-                `https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=20`
+                `https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=20`
             );
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
