@@ -4,6 +4,7 @@ import { Container } from "flux/utils";
 import { RecipesReduceStore } from "./recipes-store";
 import { Abstractions } from "simplr-flux";
 import { RecipesItemContainer } from "./recipes-item-container";
+import { Spinner } from "./spinner/spinner";
 
 interface State {
     recipes: string[];
@@ -26,7 +27,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
 
     public render(): JSX.Element | JSX.Element[] {
         if (this.state.status === Abstractions.ItemStatus.Pending) {
-            return <div>Loading...</div>;
+            return <Spinner/>;
         }
         if (this.state.recipes == null || this.state.recipes.length === 0) {
             return <div>No results found...</div>;
@@ -34,7 +35,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
         const recipeList = this.state.recipes.map((recipeId, index) => (
             <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
         ));
-        return <div>{recipeList}</div>;
+        return <div className="recipe-list">{recipeList}</div>;
     }
 }
 export const RecipesContainer = Container.create(RecipesContainerClass);

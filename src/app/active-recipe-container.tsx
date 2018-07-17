@@ -6,6 +6,7 @@ import { Recipe } from "./contracts/Recipe";
 import { RecipesMapStore } from "./recipes-map-store";
 import { Abstractions } from "simplr-flux";
 import { ActiveRecipeView } from "./components/active-recipe-view";
+import { Spinner } from "./spinner/spinner";
 
 interface Params {
     id: string;
@@ -30,11 +31,9 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
 
     public render(): JSX.Element | JSX.Element[] {
         switch (this.state.activeRecipe.Status) {
-            case Abstractions.ItemStatus.Init: {
-                return <div>No data, initializing</div>;
-            }
+            case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <div>Loading........</div>;
+                return <Spinner/>;
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.activeRecipe.Value) {

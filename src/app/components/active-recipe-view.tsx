@@ -24,7 +24,7 @@ export class ActiveRecipeView extends React.Component<Props> {
                         <p className="active-recipe__website">
                             Website:
                             <span>
-                                <a href={this.props.recipeToDisplay.publisher_url}>{this.props.recipeToDisplay.publisher_url}</a>
+                                <a href={this.props.recipeToDisplay.source_url}>{"Check out recipe here!"}</a>
                             </span>
                         </p>
                         <button className="active-recipe__button">
