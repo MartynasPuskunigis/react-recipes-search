@@ -37,7 +37,6 @@ class RecipesContainerClass extends React.Component<{}, State> {
                 favRecipes.push(item);
             }
         }
-        console.log(favRecipes);
         this.setState({
             recipes: [...favRecipes]
         });

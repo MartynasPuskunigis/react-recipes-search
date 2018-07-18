@@ -37,6 +37,7 @@ export namespace RecipesActionsCreators {
     }
 
     export function removeRecipeFromFavourites(id: string): void {
+        localStorage.removeItem(id);
         Dispatcher.dispatch(new RemoveRecipeFromFavoriteListAction(id));
     }
 }
