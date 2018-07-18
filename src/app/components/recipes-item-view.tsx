@@ -37,9 +37,9 @@ export class RecipesItemView extends React.Component<Props> {
                         <div className="fas fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
                     )}
                 </div>
-                <button className="recipe_buttons">
-                    <Link to={`/recipe/${this.props.recipe.recipe_id}`}>View Recipe</Link>
-                </button>
+                <Link className="recipe_buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
+                    View Recipe
+                </Link>
             </div>
         );
     }
