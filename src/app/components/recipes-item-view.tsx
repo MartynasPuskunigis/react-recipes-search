@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { RecipesActionsCreators } from "./../recipes-actions-creators";
 import { Recipe } from "./../contracts/Recipe";
+import * as ReactTooltip from "react-tooltip";
 
 interface Props {
     recipe: Recipe;
@@ -23,11 +24,12 @@ export class RecipesItemView extends React.Component<Props> {
             <div className="recipes__box">
                 <img className="recipe__box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
                 <div className="recipe__text">
-                    <h5 className="recipes__title">
-                        {this.props.recipe.title.length < 20
-                            ? `${this.props.recipe.title}`
-                            : `${this.props.recipe.title.substring(0, 25)}...`}
-                    </h5>
+                    <a className="recipes__title" data-tip data-for={`${this.props.recipe.recipe_id}`}>
+                        {this.props.recipe.title}
+                    </a>
+                    <ReactTooltip id={`${this.props.recipe.recipe_id}`} type="dark" effect="float">
+                        <span>{this.props.recipe.title}</span>
+                    </ReactTooltip>
                     <p className="recipes__subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>

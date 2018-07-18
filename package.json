@@ -40,6 +40,7 @@
             "querystring": "npm:querystring@^0.2.0",
             "react-router": "npm:react-router@^4.2.0",
             "react-router-dom": "npm:react-router-dom@^4.2.2",
+            "react-tooltip": "npm:react-tooltip@^3.6.1",
             "simplr-flux": "npm:simplr-flux@^2.3.0"
         },
         "devDependencies": {},
@@ -83,10 +84,10 @@
                     "test.js"
                 ]
             },
-            "npm:pbkdf2@3.0.14": {
+            "npm:pbkdf2@3.0.16": {
                 "main": "browser.js"
             },
-            "npm:safe-buffer@5.1.1": {
+            "npm:safe-buffer@5.1.2": {
                 "browser": "index.js"
             },
             "npm:tslib@1.9.0": {
@@ -100,6 +101,8 @@
         }
     },
     "dependencies": {
+        "@types/react-tooltip": "^3.3.5",
+        "react-tooltip": "^3.6.1",
         "simplr-flux": "^2.3.1"
     }
 }

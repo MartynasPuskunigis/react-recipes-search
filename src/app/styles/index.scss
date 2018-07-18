@@ -94,8 +94,9 @@ button:focus {
 }
 
 .recipe__text {
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .form__input {
