@@ -1,9 +1,9 @@
 import * as React from "react";
+import * as ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
 
 import { RecipesActionsCreators } from "./../recipes-actions-creators";
 import { Recipe } from "./../contracts/Recipe";
-import * as ReactTooltip from "react-tooltip";
 
 interface Props {
     recipe: Recipe;
@@ -21,16 +21,16 @@ export class RecipesItemView extends React.Component<Props> {
 
     public render(): JSX.Element | JSX.Element[] {
         return (
-            <div className="recipes__box">
-                <img className="recipe__box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
-                <div className="recipe__text">
-                    <a className="recipes__title" data-tip data-for={`${this.props.recipe.recipe_id}`}>
+            <div className="recipes-box">
+                <img className="recipe-box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
+                <div className="recipe-text">
+                    <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
                         {this.props.recipe.title}
                     </a>
-                    <ReactTooltip id={`${this.props.recipe.recipe_id}`} type="dark" effect="float">
+                    <ReactTooltip id={this.props.recipe.recipe_id} type="dark" effect="float">
                         <span>{this.props.recipe.title}</span>
                     </ReactTooltip>
-                    <p className="recipes__subtitle">
+                    <p className="recipes-subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
                     {this.props.isFavorite !== true ? (
@@ -39,7 +39,7 @@ export class RecipesItemView extends React.Component<Props> {
                         <div className="fas fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
                     )}
                 </div>
-                <Link className="recipe_buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
+                <Link className="recipe-buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
                     View Recipe
                 </Link>
             </div>

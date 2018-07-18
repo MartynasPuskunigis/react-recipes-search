@@ -34,7 +34,7 @@ button:focus {
     font-size: 1.5em;
 }
 
-.recipe_buttons {
+.recipe-buttons {
     border: solid 2px #e74c3c;
     background: transparent;
     padding: 0.4rem 0.6rem;
@@ -53,7 +53,7 @@ button:focus {
 
 
 
-.recipes__box {
+.recipes-box {
     background: #fff;
     padding-bottom: 2rem;
     border-radius: 5px;
@@ -72,34 +72,34 @@ button:focus {
     text-align: center;
 }
 
-.recipes__title {
+.recipes-title {
     color: #e74c3c;
     text-transform: uppercase;
     font-size: 1.1rem;
     padding: 1.8rem 0 0.2rem 0;
 }
 
-.recipes__subtitle {
+.recipes-subtitle {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 0.8rem;
     letter-spacing: 2px;
 }
 
-.recipes__subtitle span {
+.recipes-subtitle span {
     text-transform: none;
     font-weight: 400;
     font-size: 0.8rem;
     letter-spacing: 1px;
 }
 
-.recipe__text {
+.recipe-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.form__input {
+.form-input {
     background: transparent;
     border: 0;
     border-bottom: solid 2px #2c3e50;
@@ -121,7 +121,7 @@ button:focus {
     padding: 5px;
 }
 
-.form__button {
+.form-button {
     border: solid 2px #e74c3c;
     background: transparent;
     padding: 0.2rem 0.9rem;
@@ -135,48 +135,43 @@ input[type="text"] {
     outline: none;
 }
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #f3f3f3 inset;
-    -webkit-text-fill-color: #2c3e50;
-}
-
 .active-recipe {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.active-recipe__img {
+.active-recipe-img {
     height: 350px;
     width: 500px;
     border-radius: 50%;
 }
 
-.active-recipe__title {
+.active-recipe-title {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.active-recipe__publisher,
-.active-recipe__website {
+.active-recipe-publisher,
+.active-recipe-website {
     text-transform: uppercase;
     font-size: 1.2rem;
 }
 
-.active-recipe__publisher span {
+.active-recipe-publisher span {
     text-transform: none;
     font-weight: 300;
     letter-spacing: 2px;
 }
 
-.active-recipe__website span {
+.active-recipe-website span {
     text-transform: lowercase;
     font-weight: 300;
     letter-spacing: 2px;
     color: #e74c3c;
 }
 
-.active-recipe__button {
+.active-recipe-button {
     border: solid 2px #e74c3c;
     background: transparent;
     padding: 0.2rem 0.9rem;
