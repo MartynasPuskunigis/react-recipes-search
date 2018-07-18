@@ -6,18 +6,17 @@ import { RecipesActionsCreators } from "./../recipes-actions-creators";
 
 interface Props {
     recipe: Recipe;
-    isFavorite: boolean;
 }
 
 export class FavRecipesItemView extends React.Component<Props> {
-
-    private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
-        if (this.props.isFavorite) {
-            RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
-        } else {
-            RecipesActionsCreators.addRecipeToFavourites(recipeId);
-        }
-    }
+    // private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipe: Recipe): void {
+    //     if (this.props.isFavorite) {
+    //         RecipesActionsCreators.removeRecipeFromFavourites(recipe.recipe_id);
+    //     } else {
+    //         RecipesActionsCreators.addRecipeToFavourites(recipe);
+    //     }
+    // }
+    // onClick={event => this.handleFavoriteClick(event, this.props.recipe)}
 
     public render(): JSX.Element | JSX.Element[] {
         return (
@@ -32,11 +31,7 @@ export class FavRecipesItemView extends React.Component<Props> {
                     <p className="recipes__subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
-                    {this.props.isFavorite !== true ? (
-                        <div className="far fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
-                    ) : (
-                        <div className="fas fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
-                    )}
+                    <div className="fas fa-star" />
                 </div>
                 <button className="recipe_buttons">
                     <Link to={`/recipe/${this.props.recipe.recipe_id}`}>View Recipe</Link>

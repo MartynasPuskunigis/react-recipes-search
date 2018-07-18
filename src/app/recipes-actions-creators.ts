@@ -9,6 +9,7 @@ import {
 } from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
 import { API_KEY } from "./index";
+import { Recipe } from "./contracts/Recipe";
 
 export namespace RecipesActionsCreators {
     export async function searchForRecipes(keyword: string): Promise<void> {
@@ -16,7 +17,7 @@ export namespace RecipesActionsCreators {
         try {
             const recipeName = keyword;
             const apiCall = await fetch(
-                `https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=20`
+                `https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=5`
             );
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
@@ -30,8 +31,9 @@ export namespace RecipesActionsCreators {
         Dispatcher.dispatch(new ReassignActiveRecipeAction(id));
     }
 
-    export function addRecipeToFavourites(id: string): void {
-        Dispatcher.dispatch(new AddRecipeToFavoriteListAction(id));
+    export function addRecipeToFavourites(recipe: Recipe): void {
+        localStorage.setItem(recipe.recipe_id, JSON.stringify(recipe));
+        Dispatcher.dispatch(new AddRecipeToFavoriteListAction(recipe.recipe_id));
     }
 
     export function removeRecipeFromFavourites(id: string): void {
