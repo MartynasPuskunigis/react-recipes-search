@@ -2,11 +2,11 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "./recipes-map-store";
-import { RecipesItemView } from "./components/recipes-item-view";
-import { Recipe } from "./contracts/Recipe";
-import { FavRecipesReduceStore } from "./fav-recipes-store";
-import { Spinner } from "./spinner/spinner";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { RecipesItemView } from "../../components/recipe/recipes-item-view";
+import { Recipe } from "../../contracts/Recipe";
+import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
+import { Spinner } from "../../spinner/spinner";
 
 interface Props {
     recipeId: string;

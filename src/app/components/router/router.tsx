@@ -1,9 +1,9 @@
 import * as React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { HomeView } from "./home-view";
-import { ActiveRecipeContainer } from "./../active-recipe-container";
-import { FavRecipesView } from "./fav-recipes-view";
+import { HomeView } from "../home/home-view";
+import { ActiveRecipeContainer } from "../../containers/active-recipe-containers/active-recipe-container";
+import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 
 export class Router extends React.Component {
     public render(): JSX.Element | JSX.Element[] {

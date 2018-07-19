@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Recipe } from "./../contracts/Recipe";
+
+import { Recipe } from "../../contracts/Recipe";
+
+import "./active-recipe-view.css";
 
 interface Props {
     recipeToDisplay: Recipe;

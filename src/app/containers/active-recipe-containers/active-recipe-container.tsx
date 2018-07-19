@@ -2,11 +2,11 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Container } from "flux/utils";
 
-import { Recipe } from "./contracts/Recipe";
-import { RecipesMapStore } from "./recipes-map-store";
+import { Recipe } from "../../contracts/Recipe";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { Abstractions } from "simplr-flux";
-import { ActiveRecipeView } from "./components/active-recipe-view";
-import { Spinner } from "./spinner/spinner";
+import { ActiveRecipeView } from "../../components/active-recipe/active-recipe-view";
+import { Spinner } from "../../spinner/spinner";
 
 interface Params {
     id: string;

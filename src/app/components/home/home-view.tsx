@@ -1,7 +1,9 @@
 import * as React from "react";
 
-import { SearchView } from "./search-view";
-import { RecipesContainer } from "../recipes-container";
+import { SearchView } from "../search/search-view";
+import { RecipesContainer } from "../../containers/recipes-containers/recipes-container";
+
+import "./home-view.css";
 
 export class HomeView extends React.Component {
 

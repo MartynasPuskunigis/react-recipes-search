@@ -2,15 +2,17 @@ import * as React from "react";
 import * as ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
 
-import { Recipe } from "./../contracts/Recipe";
-import { RecipesActionsCreators } from "./../recipes-actions-creators";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
+import { Recipe } from "../../contracts/Recipe";
+
+import "./recipe-item-view.css";
 
 interface Props {
     recipe: Recipe;
     isFavorite: boolean;
 }
 
-export class FavRecipesItemView extends React.Component<Props> {
+export class RecipesItemView extends React.Component<Props> {
     private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
         if (this.props.isFavorite) {
             RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
@@ -44,9 +46,9 @@ export class FavRecipesItemView extends React.Component<Props> {
                         onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
                     />
                 </div>
-                <button className="recipe-buttons">
-                    <Link to={`/recipe/${this.props.recipe.recipe_id}`}>View Recipe</Link>
-                </button>
+                <Link className="recipe-buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
+                    View Recipe
+                </Link>
             </div>
         );
     }

@@ -2,10 +2,10 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "./recipes-map-store";
-import { Recipe } from "./contracts/Recipe";
-import { FavRecipesItemView } from "./components/fav-recipe-item-view";
-import { RecipesReduceStore } from "./recipes-store";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { Recipe } from "../../contracts/Recipe";
+import { RecipesItemView } from "../../components/recipe/recipes-item-view";
+import { RecipesReduceStore } from "../../stores/recipes-store";
 
 interface Props {
     recipeId: string;
@@ -37,7 +37,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <FavRecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite}/>;
+                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite}/>;
                 }
             }
             case Abstractions.ItemStatus.NoData: {

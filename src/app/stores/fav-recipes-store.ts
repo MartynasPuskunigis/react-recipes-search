@@ -3,7 +3,7 @@ import { ReduceStore, Abstractions } from "simplr-flux";
 import {
     RemoveRecipeFromFavoriteListAction,
     AddRecipeToFavoriteListAction
-} from "./recipes-actions";
+} from "../actions/recipes-actions";
 
 interface StoreState {
     favRecipes: string[];
