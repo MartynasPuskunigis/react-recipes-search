@@ -48,7 +48,7 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
                     <div>
                         Failed to load...
                         <span>
-                            <button>Retry...</button>
+                            <button >Retry...</button>
                         </span>
                     </div>
                 );
