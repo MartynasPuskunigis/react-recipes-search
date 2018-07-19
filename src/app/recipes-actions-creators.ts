@@ -9,7 +9,6 @@ import {
 } from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
 import { API_KEY } from "./index";
-import { Recipe } from "./contracts/Recipe";
 
 export namespace RecipesActionsCreators {
     export async function searchForRecipes(keyword: string): Promise<void> {
@@ -31,9 +30,8 @@ export namespace RecipesActionsCreators {
         Dispatcher.dispatch(new ReassignActiveRecipeAction(id));
     }
 
-    export function addRecipeToFavourites(recipe: Recipe): void {
-        localStorage.setItem(recipe.recipe_id, JSON.stringify(recipe));
-        Dispatcher.dispatch(new AddRecipeToFavoriteListAction(recipe.recipe_id));
+    export function addRecipeToFavourites(recipeId: string): void {
+        Dispatcher.dispatch(new AddRecipeToFavoriteListAction(recipeId));
     }
 
     export function removeRecipeFromFavourites(id: string): void {

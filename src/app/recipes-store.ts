@@ -1,16 +1,11 @@
 import { ReduceStore, Abstractions } from "simplr-flux";
 
-import {
-    RecipesIdsFetchedAction,
-    RecipesIdsLoadStartedAction,
-    ReassignActiveRecipeAction
-} from "./recipes-actions";
+import { RecipesIdsFetchedAction, RecipesIdsLoadStartedAction, ReassignActiveRecipeAction } from "./recipes-actions";
 
 interface StoreState {
     recipes: string[];
     status: Abstractions.ItemStatus;
     activeRecipe: string;
-    favoriteRecipes: string[];
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -55,8 +50,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             recipes: [],
             status: Abstractions.ItemStatus.Init,
-            activeRecipe: "",
-            favoriteRecipes: []
+            activeRecipe: ""
         };
     }
 }

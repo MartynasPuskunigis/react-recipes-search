@@ -10,11 +10,11 @@ interface Props {
 }
 
 export class RecipesItemView extends React.Component<Props> {
-    private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipe: Recipe): void {
+    private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
         if (this.props.isFavorite) {
-            RecipesActionsCreators.removeRecipeFromFavourites(recipe.recipe_id);
+            RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
         } else {
-            RecipesActionsCreators.addRecipeToFavourites(recipe);
+            RecipesActionsCreators.addRecipeToFavourites(recipeId);
         }
     }
 
@@ -32,9 +32,9 @@ export class RecipesItemView extends React.Component<Props> {
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
                     {this.props.isFavorite !== true ? (
-                        <div className="far fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe)} />
+                        <div className="far fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
                     ) : (
-                        <div className="fas fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe)} />
+                        <div className="fas fa-star" onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)} />
                     )}
                 </div>
                 <button className="recipe_buttons">

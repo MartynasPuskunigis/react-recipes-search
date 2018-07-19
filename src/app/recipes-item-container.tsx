@@ -37,10 +37,10 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
                     return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite}/>;
                 }
             }
-            case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
                 return <Spinner/>;
             }
+            case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.NoData: {
                 return <div>No data.</div>;
             }
@@ -51,6 +51,7 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
                     </div>
                 );
             }
+
         }
     }
 }

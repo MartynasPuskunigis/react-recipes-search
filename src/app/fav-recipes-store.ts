@@ -1,4 +1,4 @@
-import { ReduceStore, Abstractions } from "simplr-flux";
+import { ReduceStore } from "simplr-flux";
 
 import {
     RemoveRecipeFromFavoriteListAction,
@@ -7,7 +7,6 @@ import {
 
 interface StoreState {
     favRecipes: string[];
-    status: Abstractions.ItemStatus;
 }
 
 class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -18,6 +17,17 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onDeleteFavorite(action: AddRecipeToFavoriteListAction, state: StoreState): StoreState {
+        // for (let i = 0; i < localStorage.length; i++) {
+        //     const key = localStorage.key(i);
+        //     if (key != null && localStorage.getItem(key) != null) {
+        //         const item = JSON.parse(localStorage.getItem(key)!);
+        //         favRecipes.push(item);
+        //     }
+        // }
+        // this.setState({
+        //     recipes: [...favRecipes]
+        // });
+        localStorage.removeItem(action.recipeId);
         const nextState = {
             ...state
         };
@@ -27,26 +37,37 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
             }
         }
         return {
-            ...state,
             favRecipes: [...nextState.favRecipes]
         };
     }
 
     private onAddNewFavorite(action: AddRecipeToFavoriteListAction, state: StoreState): StoreState {
+        localStorage.setItem(action.recipeId, action.recipeId);
         const nextState = {
             ...state
         };
         nextState.favRecipes.push(action.recipeId);
         return {
-            ...state,
             favRecipes: [...nextState.favRecipes]
         };
     }
 
+    public getLocalStorage(): string[] {
+        const favRecipes: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key != null && localStorage.getItem(key) != null) {
+                const item = localStorage.getItem(key)!;
+                favRecipes.push(item);
+            }
+        }
+        console.log(favRecipes);
+        return favRecipes;
+    }
+
     public getInitialState(): StoreState {
         return {
-            favRecipes: [],
-            status: Abstractions.ItemStatus.Init
+            favRecipes: this.getLocalStorage(),
         };
     }
 }
