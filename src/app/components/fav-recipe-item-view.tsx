@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
 
 import { Recipe } from "./../contracts/Recipe";
@@ -19,29 +20,29 @@ export class FavRecipesItemView extends React.Component<Props> {
     }
 
     public render(): JSX.Element | JSX.Element[] {
+        let favouriteButtonClassName: string;
+        if (this.props.isFavorite !== true) {
+            favouriteButtonClassName = "far fa-star star-icon-empty";
+        } else {
+            favouriteButtonClassName = "fas fa-star star-icon-full";
+        }
         return (
             <div className="recipes-box">
                 <img className="recipe-box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
                 <div className="recipe-text">
-                    <h5 className="recipes-title">
-                        {this.props.recipe.title.length < 20
-                            ? `${this.props.recipe.title}`
-                            : `${this.props.recipe.title.substring(0, 25)}...`}
-                    </h5>
+                    <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
+                        {this.props.recipe.title}
+                    </a>
+                    <ReactTooltip id={this.props.recipe.recipe_id} type="dark" effect="float">
+                        <span>{this.props.recipe.title}</span>
+                    </ReactTooltip>
                     <p className="recipes-subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
-                    {this.props.isFavorite !== true ? (
-                        <div
-                            className="far fa-star star-icon-empty"
-                            onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
-                        />
-                    ) : (
-                        <div
-                            className="fas fa-star star-icon-full"
-                            onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
-                        />
-                    )}
+                    <div
+                        className={favouriteButtonClassName}
+                        onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
+                    />
                 </div>
                 <button className="recipe-buttons">
                     <Link to={`/recipe/${this.props.recipe.recipe_id}`}>View Recipe</Link>

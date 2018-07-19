@@ -20,6 +20,12 @@ export class RecipesItemView extends React.Component<Props> {
     }
 
     public render(): JSX.Element | JSX.Element[] {
+        let favouriteButtonClassName: string;
+        if (this.props.isFavorite !== true) {
+            favouriteButtonClassName = "far fa-star star-icon-empty";
+        } else {
+            favouriteButtonClassName = "fas fa-star star-icon-full";
+        }
         return (
             <div className="recipes-box">
                 <img className="recipe-box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
@@ -33,17 +39,10 @@ export class RecipesItemView extends React.Component<Props> {
                     <p className="recipes-subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
-                    {this.props.isFavorite !== true ? (
-                        <div
-                            className="far fa-star star-icon-empty"
-                            onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
-                        />
-                    ) : (
-                        <div
-                            className="fas fa-star star-icon-full"
-                            onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
-                        />
-                    )}
+                    <div
+                        className={favouriteButtonClassName}
+                        onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
+                    />
                 </div>
                 <Link className="recipe-buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
                     View Recipe
