@@ -3,9 +3,9 @@ import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
 import { RecipesMapStore } from "../../stores/recipes-map-store";
-import { Recipe } from "../../contracts/Recipe";
-import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { RecipesReduceStore } from "../../stores/recipes-store";
+import { RecipesItemView } from "../../components/recipe/recipes-item-view";
+import { Recipe } from "../../contracts/Recipe";
 
 interface Props {
     recipeId: string;

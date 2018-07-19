@@ -12,7 +12,7 @@ interface Props {
 export class ActiveRecipeView extends React.Component<Props> {
     public render(): JSX.Element | JSX.Element[] {
         return (
-            <div className="container">
+            <div className="active-recipe-view">
                 {this.props.recipeToDisplay != null && (
                     <div className="active-recipe">
                         <img

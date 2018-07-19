@@ -3,10 +3,11 @@ import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
 import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
-import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { Spinner } from "../../spinner/spinner";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 interface Props {
     recipeId: string;
@@ -29,6 +30,11 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
         };
     }
 
+    private onRetryClick(event: React.MouseEvent<HTMLButtonElement>, recipeId: string): void {
+        RecipesMapStore.InvalidateCache(recipeId);
+        RecipesActionsCreators.invalidateOneItemCache(recipeId);
+    }
+
     public render(): JSX.Element {
         const isFavorite = this.state.favRecipes.indexOf(this.props.recipeId) > -1;
         switch (this.state.recipe.Status) {
@@ -49,7 +55,7 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
                     <div>
                         Failed to load...
                         <span>
-                            <button>Retry...</button>
+                            <button onClick={event => this.onRetryClick(event, this.props.recipeId)}>Retry...</button>
                         </span>
                     </div>
                 );

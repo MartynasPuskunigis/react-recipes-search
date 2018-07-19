@@ -9,7 +9,7 @@ export class HomeView extends React.Component {
 
     public render(): JSX.Element {
         return (
-            <div className="App">
+            <div className="home-view">
                 <SearchView/>
                 <RecipesContainer/>
             </div>

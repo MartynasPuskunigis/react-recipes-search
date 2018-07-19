@@ -31,3 +31,13 @@ export class RemoveRecipeFromFavoriteListAction {
         return this.id;
     }
 }
+
+export class InvalidateEntireCache {}
+
+export class InvalidateOneItemCache {
+    constructor(private id: string) {}
+
+    public get recipeId(): string {
+        return this.id;
+    }
+}

@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactTooltip from "react-tooltip";
+import * as classNames from "classnames";
 import { Link } from "react-router-dom";
 
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
@@ -22,14 +23,19 @@ export class RecipesItemView extends React.Component<Props> {
     }
 
     public render(): JSX.Element | JSX.Element[] {
-        let favouriteButtonClassName: string;
-        if (this.props.isFavorite !== true) {
-            favouriteButtonClassName = "far fa-star star-icon-empty";
-        } else {
-            favouriteButtonClassName = "fas fa-star star-icon-full";
-        }
+        const favouriteButtonClassName = classNames(
+            {
+                "far fa-star": !this.props.isFavorite,
+                "fas fa-star": this.props.isFavorite
+            },
+            {
+                "star-icon-empty": !this.props.isFavorite,
+                "star-icon-full": this.props.isFavorite
+            }
+        );
+
         return (
-            <div className="recipes-box">
+            <div className="recipes-item-view">
                 <img className="recipe-box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
                 <div className="recipe-text">
                     <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>

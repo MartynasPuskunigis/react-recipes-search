@@ -5,7 +5,9 @@ import {
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
     AddRecipeToFavoriteListAction,
-    RemoveRecipeFromFavoriteListAction
+    RemoveRecipeFromFavoriteListAction,
+    InvalidateEntireCache,
+    InvalidateOneItemCache
 } from "./recipes-actions";
 import { Recipes } from "../contracts/Recipes";
 import { API_KEY } from "../shared/apikey";
@@ -36,5 +38,13 @@ export namespace RecipesActionsCreators {
 
     export function removeRecipeFromFavourites(id: string): void {
         Dispatcher.dispatch(new RemoveRecipeFromFavoriteListAction(id));
+    }
+
+    export function invalidateEntireCache(): void {
+        Dispatcher.dispatch(new InvalidateEntireCache());
+    }
+
+    export function invalidateOneItemCache(recipeId: string): void {
+        Dispatcher.dispatch(new InvalidateOneItemCache(recipeId));
     }
 }

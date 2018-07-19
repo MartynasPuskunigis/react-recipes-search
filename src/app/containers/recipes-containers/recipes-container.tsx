@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Container } from "flux/utils";
-
-import { RecipesReduceStore } from "../../stores/recipes-store";
 import { Abstractions } from "simplr-flux";
+
+import { RecipesMapStore } from "./../../stores/recipes-map-store";
+import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesItemContainer } from "./recipes-item-container";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 interface State {
     recipes: string[];
@@ -27,10 +29,12 @@ class RecipesContainerClass extends React.Component<{}, State> {
         };
     }
 
+    private onRetryClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        RecipesMapStore.InvalidateCacheMultiple(this.state.recipes);
+        RecipesActionsCreators.invalidateEntireCache();
+    };
+
     public render(): JSX.Element | JSX.Element[] {
-        const recipeList = this.state.recipes.map((recipeId, index) => (
-            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
-        ));
         switch (this.state.status) {
             case Abstractions.ItemStatus.Init: {
                 return <div>Search not initialized</div>;
@@ -39,9 +43,15 @@ class RecipesContainerClass extends React.Component<{}, State> {
                 return <Spinner />;
             }
             case Abstractions.ItemStatus.Loaded: {
-                return <div className="recipe-list">{recipeList}</div>;
+                return (
+                    <div className="recipe-list">
+                        {this.state.recipes.map((recipeId, index) => (
+                            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+                        ))}
+                    </div>
+                );
             }
-            case (Abstractions.ItemStatus.NoData): {
+            case Abstractions.ItemStatus.NoData: {
                 return <div>No results found...</div>;
             }
             case Abstractions.ItemStatus.Failed: {
@@ -49,7 +59,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
                     <div>
                         Failed to load...
                         <span>
-                            <button>Retry...</button>
+                            <button onClick={this.onRetryClick}>Retry...</button>
                         </span>
                     </div>
                 );

@@ -66,6 +66,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "classnames": "npm:classnames@2.2.6",
     "action-emitter": "npm:action-emitter@0.2.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
