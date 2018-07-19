@@ -1,3 +1,6 @@
+$empty-star: 
+$full-star: 
+
 body {
     background: #f3f3f3;
 }
@@ -108,7 +111,7 @@ button:focus {
     padding: 0.4rem;
 }
 
-.far.fa-star {
+.star-icon-empty {
   color: grey;
   padding: 5px;
 
@@ -116,7 +119,7 @@ button:focus {
       color: black;
   }
 }
-.fas.fa-star {
+.star-icon-full {
     color: gold;
     padding: 5px;
 }
