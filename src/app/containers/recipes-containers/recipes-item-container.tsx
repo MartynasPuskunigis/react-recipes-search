@@ -34,12 +34,12 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
         switch (this.state.recipe.Status) {
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite}/>;
+                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite} />;
                 }
             }
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner/>;
+                return <Spinner />;
             }
             case Abstractions.ItemStatus.NoData: {
                 return <div>No data.</div>;
@@ -47,7 +47,10 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load... <span><button>Retry...</button></span>
+                        Failed to load...
+                        <span>
+                            <button>Retry...</button>
+                        </span>
                     </div>
                 );
             }

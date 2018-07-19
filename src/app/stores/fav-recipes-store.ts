@@ -1,4 +1,4 @@
-import { ReduceStore, Abstractions } from "simplr-flux";
+import { ReduceStore } from "simplr-flux";
 
 import {
     RemoveRecipeFromFavoriteListAction,
@@ -7,7 +7,6 @@ import {
 
 interface StoreState {
     favRecipes: string[];
-    status: Abstractions.ItemStatus;
 }
 
 class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -45,8 +44,7 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
 
     public getInitialState(): StoreState {
         return {
-            favRecipes: [],
-            status: Abstractions.ItemStatus.Init
+            favRecipes: []
         };
     }
 }

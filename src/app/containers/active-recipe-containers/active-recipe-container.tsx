@@ -33,7 +33,7 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
         switch (this.state.activeRecipe.Status) {
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner/>;
+                return <Spinner />;
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.activeRecipe.Value) {
@@ -46,7 +46,7 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load...{" "}
+                        Failed to load...
                         <span>
                             <button>Retry...</button>
                         </span>

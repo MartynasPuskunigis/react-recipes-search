@@ -28,16 +28,33 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public render(): JSX.Element | JSX.Element[] {
-        if (this.state.status === Abstractions.ItemStatus.Pending) {
-            return <Spinner/>;
-        }
-        if (this.state.recipes == null || this.state.recipes.length === 0) {
-            return <div>No results found...</div>;
-        }
         const recipeList = this.state.recipes.map((recipeId, index) => (
             <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
         ));
-        return <div className="recipe-list">{recipeList}</div>;
+        switch (this.state.status) {
+            case Abstractions.ItemStatus.Init: {
+                return <div>Search not initialized</div>;
+            }
+            case Abstractions.ItemStatus.Pending: {
+                return <Spinner />;
+            }
+            case Abstractions.ItemStatus.Loaded: {
+                return <div className="recipe-list">{recipeList}</div>;
+            }
+            case (Abstractions.ItemStatus.NoData): {
+                return <div>No results found...</div>;
+            }
+            case Abstractions.ItemStatus.Failed: {
+                return (
+                    <div>
+                        Failed to load...
+                        <span>
+                            <button>Retry...</button>
+                        </span>
+                    </div>
+                );
+            }
+        }
     }
 }
 export const RecipesContainer = Container.create(RecipesContainerClass);
