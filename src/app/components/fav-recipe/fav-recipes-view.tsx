@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { FavRecipesContainer } from "../fav-recipes-container";
+import { FavRecipesContainer } from "../../fav-recipes-container";
 
 export class FavRecipesView extends React.Component {
 
