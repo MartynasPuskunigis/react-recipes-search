@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Container } from "flux/utils";
 
-import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { FavRecipesItemContainer } from "./fav-recipes-item-container";
+import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 
 interface State {
     recipes: string[];

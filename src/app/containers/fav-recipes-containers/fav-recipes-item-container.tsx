@@ -2,8 +2,8 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { RecipesReduceStore } from "../../stores/recipes-store";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
 
