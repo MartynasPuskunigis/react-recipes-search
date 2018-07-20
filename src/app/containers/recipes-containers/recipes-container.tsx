@@ -2,13 +2,13 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "./../../stores/recipes-map-store";
-import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesItemContainer } from "./recipes-item-container";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { RecipesReduceStore } from "../../stores/recipes-store";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
-import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 interface State {
     recipes: string[];
