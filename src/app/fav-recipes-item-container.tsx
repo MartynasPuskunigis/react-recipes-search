@@ -47,7 +47,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load...{" "}
+                        Failed to load...
                         <span>
                             <button>Retry...</button>
                         </span>
