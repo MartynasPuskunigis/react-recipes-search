@@ -6,6 +6,8 @@ import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesItemContainer } from "./recipes-item-container";
 import { Spinner } from "../../spinner/spinner";
 
+import "./recipes-container.css";
+
 interface State {
     recipes: string[];
     status: Abstractions.ItemStatus;

@@ -27,8 +27,7 @@
         "simplr-tslint": "^1.0.0-alpha.13",
         "source-map-loader": "^0.2.3",
         "tslint": "^5.10.0",
-        "typescript": "^2.9.2",
-        "simplr-flux": "^2.3.1"
+        "typescript": "^2.9.2"
     },
     "jspm": {
         "name": "simple-react",
