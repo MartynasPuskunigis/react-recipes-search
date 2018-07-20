@@ -2,11 +2,11 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { FavRecipesReduceStore } from "./fav-recipes-store";
-import { RecipesMapStore } from "./recipes-map-store";
-import { FavRecipesItemView } from "./components/fav-recipe-item-view";
-import { Recipe } from "./contracts/Recipe";
-import { Spinner } from "./spinner/spinner";
+import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { RecipesItemView } from "../../components/recipe/recipes-item-view";
+import { Recipe } from "../../contracts/Recipe";
+import { Spinner } from "../../spinner/spinner";
 
 interface Props {
     recipeId: string;
@@ -30,11 +30,16 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
         };
     }
 
+    private onRetryClick(event: React.MouseEvent<HTMLButtonElement>, recipeId: string): void {
+        RecipesMapStore.InvalidateCache(recipeId);
+    }
+
     public render(): JSX.Element {
+        const isFavorite = this.state.favRecipes.indexOf(this.props.recipeId) > -1;
         switch (this.state.recipeToDisplay.Status) {
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipeToDisplay.Value) {
-                    return <FavRecipesItemView recipeToDisplay={this.state.recipeToDisplay.Value} />;
+                    return <RecipesItemView recipe={this.state.recipeToDisplay.Value} isFavorite={isFavorite} />;
                 }
             }
             case Abstractions.ItemStatus.Init:
@@ -49,7 +54,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
                     <div>
                         Failed to load...
                         <span>
-                            <button>Retry...</button>
+                            <button onClick={event => this.onRetryClick(event, this.props.recipeId)}>Retry...</button>
                         </span>
                     </div>
                 );

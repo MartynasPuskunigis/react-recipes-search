@@ -1,6 +1,9 @@
 import { ReduceStore } from "simplr-flux";
 
-import { RemoveRecipeFromFavoriteListAction, AddRecipeToFavoriteListAction } from "./recipes-actions";
+import {
+    RemoveRecipeFromFavoriteListAction,
+    AddRecipeToFavoriteListAction
+} from "../actions/recipes-actions";
 
 interface StoreState {
     favRecipes: string[];
@@ -29,7 +32,6 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onAddNewFavorite(action: AddRecipeToFavoriteListAction, state: StoreState): StoreState {
-        localStorage.setItem(action.recipeId, action.recipeId);
         const nextState = {
             ...state
         };

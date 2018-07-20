@@ -1,11 +1,17 @@
 import { ReduceStore, Abstractions } from "simplr-flux";
 
-import { RecipesIdsFetchedAction, RecipesIdsLoadStartedAction, ReassignActiveRecipeAction } from "./recipes-actions";
+import {
+    RecipesIdsFetchedAction,
+    RecipesIdsLoadStartedAction,
+    ReassignActiveRecipeAction,
+    InvalidateEntireCache
+} from "../actions/recipes-actions";
 
 interface StoreState {
     recipes: string[];
     status: Abstractions.ItemStatus;
-    activeRecipeId: string | undefined;
+    activeRecipe: string;
+    favoriteRecipes: string[];
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -14,13 +20,14 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(RecipesIdsFetchedAction, this.onSearchBoxChanged.bind(this));
         this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
+        this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
         return {
             ...state,
             recipes: action.getRecipes,
-            status: Abstractions.ItemStatus.Loaded
+            status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData
         };
     }
 
@@ -37,7 +44,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             if (state.recipes[i] === action.newRecipeId) {
                 return {
                     ...state,
-                    activeRecipeId: state.recipes[i]
+                    activeRecipe: state.recipes[i]
                 };
             }
         }
@@ -50,7 +57,8 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             recipes: [],
             status: Abstractions.ItemStatus.Init,
-            activeRecipeId: undefined
+            activeRecipe: "",
+            favoriteRecipes: []
         };
     }
 }

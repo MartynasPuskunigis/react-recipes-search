@@ -5,10 +5,11 @@ import {
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
     AddRecipeToFavoriteListAction,
-    RemoveRecipeFromFavoriteListAction
+    RemoveRecipeFromFavoriteListAction,
+    InvalidateEntireCache
 } from "./recipes-actions";
-import { Recipes } from "./contracts/Recipes";
-import { API_KEY } from "./shared/apikey";
+import { Recipes } from "../contracts/Recipes";
+import { API_KEY } from "../shared/apikey";
 
 export namespace RecipesActionsCreators {
     export async function searchForRecipes(keyword: string): Promise<void> {
@@ -31,11 +32,16 @@ export namespace RecipesActionsCreators {
     }
 
     export function addRecipeToFavourites(recipeId: string): void {
+        localStorage.setItem(recipeId, recipeId);
         Dispatcher.dispatch(new AddRecipeToFavoriteListAction(recipeId));
     }
 
     export function removeRecipeFromFavourites(id: string): void {
         localStorage.removeItem(id);
         Dispatcher.dispatch(new RemoveRecipeFromFavoriteListAction(id));
+    }
+
+    export function invalidateEntireCache(): void {
+        Dispatcher.dispatch(new InvalidateEntireCache());
     }
 }

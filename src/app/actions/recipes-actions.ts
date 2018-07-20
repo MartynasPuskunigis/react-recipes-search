@@ -31,3 +31,5 @@ export class RemoveRecipeFromFavoriteListAction {
         return this.id;
     }
 }
+
+export class InvalidateEntireCache {}
