@@ -3,10 +3,10 @@ import { RouteComponentProps } from "react-router-dom";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "./recipes-map-store";
-import { ActiveRecipeView } from "./components/active-recipe/active-recipe-view";
-import { Spinner } from "./spinner/spinner";
-import { Recipe } from "./contracts/Recipe";
+import { RecipesMapStore } from "../stores/recipes-map-store";
+import { ActiveRecipeView } from "../components/active-recipe/active-recipe-view";
+import { Spinner } from "../spinner/spinner";
+import { Recipe } from "../contracts/Recipe";
 
 interface Params {
     id: string;

@@ -1,7 +1,7 @@
 import { MapStore } from "simplr-flux";
 
-import { Recipe } from "./contracts/Recipe";
-import { API_KEY } from "./shared/apikey";
+import { Recipe } from "../contracts/Recipe";
+import { API_KEY } from "../shared/apikey";
 
 type RecipesDictionary = { [key: string]: Recipe };
 

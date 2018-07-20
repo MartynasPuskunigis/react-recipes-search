@@ -4,7 +4,7 @@ import {
     RecipesIdsFetchedAction,
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction
-} from "./recipes-actions";
+} from "../actions/recipes-actions";
 
 interface StoreState {
     recipes: string[];

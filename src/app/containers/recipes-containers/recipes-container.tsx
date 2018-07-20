@@ -2,9 +2,9 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { FavRecipesReduceStore } from "./fav-recipes-store";
-import { FavRecipesItemContainer } from "./fav-recipes-item-container";
-import { Spinner } from "./spinner/spinner";
+import { RecipesReduceStore } from "../../stores/recipes-store";
+import { RecipesItemContainer } from "./recipes-item-container";
+import { Spinner } from "../../spinner/spinner";
 
 interface State {
     recipes: string[];
@@ -13,15 +13,15 @@ interface State {
 
 class RecipesContainerClass extends React.Component<{}, State> {
     public static getStores(): Container.StoresList {
-        return [FavRecipesReduceStore];
+        return [RecipesReduceStore];
     }
 
     public static calculateState(state: State): State {
-        const { favRecipes, status } = FavRecipesReduceStore.getState();
+        const { recipes, status } = RecipesReduceStore.getState();
 
         return {
-            recipes: favRecipes,
-            status: status
+            status: status,
+            recipes: recipes
         };
     }
 
@@ -33,9 +33,9 @@ class RecipesContainerClass extends React.Component<{}, State> {
             return <div>No results found...</div>;
         }
         const recipeList = this.state.recipes.map((recipeId, index) => (
-            <FavRecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
         ));
         return <div className="recipe-list">{recipeList}</div>;
     }
 }
-export const FavRecipesContainer = Container.create(RecipesContainerClass);
+export const RecipesContainer = Container.create(RecipesContainerClass);

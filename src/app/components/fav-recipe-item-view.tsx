@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { RecipesActionsCreators } from "../recipes-actions-creators";
+import { RecipesActionsCreators } from "../actions/recipes-actions-creators";
 import { Recipe } from "../contracts/Recipe";
 
 interface Props {
