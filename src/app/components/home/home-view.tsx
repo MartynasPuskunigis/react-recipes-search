@@ -6,7 +6,6 @@ import { RecipesContainer } from "../../containers/recipes-containers/recipes-co
 import "./home-view.css";
 
 export class HomeView extends React.Component {
-
     public render(): JSX.Element {
         return (
             <div className="home-view">

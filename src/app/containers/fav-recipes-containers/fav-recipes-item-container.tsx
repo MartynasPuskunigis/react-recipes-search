@@ -2,29 +2,31 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesReduceStore } from "../../stores/recipes-store";
+import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
+import { Spinner } from "../../spinner/spinner";
 
 interface Props {
     recipeId: string;
 }
 
 interface State {
-    recipe: Abstractions.Item<Recipe>;
     favRecipes: string[];
+    recipeToDisplay: Abstractions.Item<Recipe>;
 }
 
 class FavRecipesItemContainerClass extends React.Component<Props, State> {
     public static getStores(): Container.StoresList {
-        return [RecipesMapStore, RecipesReduceStore];
+        return [FavRecipesReduceStore, RecipesMapStore];
     }
 
     public static calculateState(state: State, props: Props): State {
+        const { favRecipes } = FavRecipesReduceStore.getState();
         return {
-            recipe: RecipesMapStore.get(props.recipeId),
-            favRecipes: RecipesReduceStore.getState().favoriteRecipes
+            recipeToDisplay: RecipesMapStore.get(props.recipeId),
+            favRecipes: favRecipes
         };
     }
 
@@ -34,15 +36,15 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
 
     public render(): JSX.Element {
         const isFavorite = this.state.favRecipes.indexOf(this.props.recipeId) > -1;
-        switch (this.state.recipe.Status) {
+        switch (this.state.recipeToDisplay.Status) {
+            case Abstractions.ItemStatus.Loaded: {
+                if (this.state.recipeToDisplay.Value) {
+                    return <RecipesItemView recipe={this.state.recipeToDisplay.Value} isFavorite={isFavorite} />;
+                }
+            }
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <div>Loading...</div>;
-            }
-            case Abstractions.ItemStatus.Loaded: {
-                if (this.state.recipe.Value) {
-                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite} />;
-                }
+                return <Spinner />;
             }
             case Abstractions.ItemStatus.NoData: {
                 return <div>No data.</div>;

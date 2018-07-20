@@ -5,9 +5,9 @@ import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 export class SearchView extends React.Component {
     protected onSearchBoxActivated: React.KeyboardEventHandler<HTMLInputElement> = event => {
-            if (event.key === "Enter") {
-                RecipesActionsCreators.searchForRecipes(event.currentTarget.value);
-            }
+        if (event.key === "Enter") {
+            RecipesActionsCreators.searchForRecipes(event.currentTarget.value);
+        }
     };
 
     public render(): JSX.Element {

@@ -2,14 +2,16 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesItemContainer } from "./recipes-item-container";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
+import { RecipesReduceStore } from "../../stores/recipes-store";
+import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
 
 interface State {
-    recipes: string[];
+    recipesIds: string[];
     status: Abstractions.ItemStatus;
 }
 
@@ -23,21 +25,46 @@ class RecipesContainerClass extends React.Component<{}, State> {
 
         return {
             status: status,
-            recipes: recipes
+            recipesIds: recipes
         };
     }
 
+    private onRetryClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        RecipesMapStore.InvalidateCacheMultiple(this.state.recipesIds);
+        RecipesActionsCreators.invalidateEntireCache();
+    };
+
     public render(): JSX.Element | JSX.Element[] {
-        if (this.state.status === Abstractions.ItemStatus.Pending) {
-            return <Spinner/>;
+        switch (this.state.status) {
+            case Abstractions.ItemStatus.Init: {
+                return <div>Search not initialized...</div>;
+            }
+            case Abstractions.ItemStatus.Pending: {
+                return <Spinner />;
+            }
+            case Abstractions.ItemStatus.Loaded: {
+                return (
+                    <div className="recipe-list">
+                        {this.state.recipesIds.map((recipeId, index) => (
+                            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+                        ))}
+                    </div>
+                );
+            }
+            case Abstractions.ItemStatus.NoData: {
+                return <div>No results found...</div>;
+            }
+            case Abstractions.ItemStatus.Failed: {
+                return (
+                    <div>
+                        Failed to load...
+                        <span>
+                            <button onClick={this.onRetryClick}>Retry...</button>
+                        </span>
+                    </div>
+                );
+            }
         }
-        if (this.state.recipes == null || this.state.recipes.length === 0) {
-            return <div>No results found...</div>;
-        }
-        const recipeList = this.state.recipes.map((recipeId, index) => (
-            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
-        ));
-        return <div className="recipe-list">{recipeList}</div>;
     }
 }
 export const RecipesContainer = Container.create(RecipesContainerClass);

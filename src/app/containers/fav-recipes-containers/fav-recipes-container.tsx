@@ -5,7 +5,7 @@ import { FavRecipesItemContainer } from "./fav-recipes-item-container";
 import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 
 interface State {
-    recipes: string[];
+    recipesIds: string[];
 }
 
 class RecipesContainerClass extends React.Component<{}, State> {
@@ -15,21 +15,20 @@ class RecipesContainerClass extends React.Component<{}, State> {
 
     public static calculateState(state: State): State {
         const { favRecipes } = FavRecipesReduceStore.getState();
-
         return {
-            recipes: favRecipes
+            ...state,
+            recipesIds: favRecipes
         };
     }
 
     public render(): JSX.Element | JSX.Element[] {
-        const recipeList = this.state.recipes.map((recipeId, index) => (
+        if (this.state.recipesIds == null || this.state.recipesIds.length === 0) {
+            return <div>You have no favorite recipes...</div>;
+        }
+        const recipeList = this.state.recipesIds.map((recipeId, index) => (
             <FavRecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
         ));
-        if (this.state.recipes == null || this.state.recipes.length === 0) {
-            return <div>No results found...</div>;
-        } else {
-            return <div className="recipe-list">{recipeList}</div>;
-        }
+        return <div className="recipe-list">{recipeList}</div>;
     }
 }
 export const FavRecipesContainer = Container.create(RecipesContainerClass);

@@ -17,6 +17,7 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onDeleteFavorite(action: AddRecipeToFavoriteListAction, state: StoreState): StoreState {
+        localStorage.removeItem(action.recipeId);
         const nextState = {
             ...state
         };
@@ -26,7 +27,6 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
             }
         }
         return {
-            ...state,
             favRecipes: [...nextState.favRecipes]
         };
     }
@@ -37,14 +37,26 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
         };
         nextState.favRecipes.push(action.recipeId);
         return {
-            ...state,
             favRecipes: [...nextState.favRecipes]
         };
     }
 
+    public getFavRecipesIdsFromLocalStorage(): string[] {
+        const favRecipes: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key != null && localStorage.getItem(key) != null) {
+                //Using exclamation mark because localStorage.getItem(key) != null is checked in the if statement
+                const item = localStorage.getItem(key)!;
+                favRecipes.push(item);
+            }
+        }
+        return favRecipes;
+    }
+
     public getInitialState(): StoreState {
         return {
-            favRecipes: []
+            favRecipes: this.getFavRecipesIdsFromLocalStorage()
         };
     }
 }

@@ -4,8 +4,7 @@ import {
     RecipesIdsFetchedAction,
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
-    InvalidateEntireCache,
-    InvalidateOneItemCache
+    InvalidateEntireCache
 } from "../actions/recipes-actions";
 
 interface StoreState {
@@ -22,14 +21,13 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
         this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
-        this.registerAction(InvalidateOneItemCache, this.onInvalidateOneItem.bind(this));
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
         return {
             ...state,
             recipes: action.getRecipes,
-            status: Abstractions.ItemStatus.Loaded
+            status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData
         };
     }
 
@@ -52,21 +50,6 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         }
         return {
             ...state
-        };
-    }
-
-    private onInvalidateOneItem(action: InvalidateOneItemCache, state: StoreState): StoreState {
-        const nextState = {
-            ...state
-        };
-        for (let i = 0; i < nextState.recipes.length; i++) {
-            if (nextState.recipes[i] === action.recipeId) {
-                nextState.recipes = nextState.recipes.filter(x => x !== nextState.recipes[i]);
-            }
-        }
-        return {
-            ...state,
-            recipes: [...nextState.recipes]
         };
     }
 

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { FavRecipesContainer } from "../../containers/fav-recipes-containers/fav-recipes-container";
 
 export class FavRecipesView extends React.Component {
-
     public render(): JSX.Element {
         return (
             <div className="fav-recipes-view">
@@ -12,7 +11,7 @@ export class FavRecipesView extends React.Component {
                     <div>These are your favorite recipes</div>
                     <Link to="/">Go to home page</Link>
                 </div>
-                <FavRecipesContainer/>
+                <FavRecipesContainer />
             </div>
         );
     }

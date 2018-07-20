@@ -36,14 +36,14 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
     public render(): JSX.Element {
         const isFavorite = this.state.favRecipes.indexOf(this.props.recipeId) > -1;
         switch (this.state.recipe.Status) {
+            case Abstractions.ItemStatus.Init:
+            case Abstractions.ItemStatus.Pending: {
+                return <Spinner />;
+            }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
                     return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite} />;
                 }
-            }
-            case Abstractions.ItemStatus.Init:
-            case Abstractions.ItemStatus.Pending: {
-                return <Spinner />;
             }
             case Abstractions.ItemStatus.NoData: {
                 return <div>No data.</div>;
