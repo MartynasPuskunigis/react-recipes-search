@@ -14,7 +14,6 @@
         "@types/prop-types": "^15.5.3",
         "@types/react": "^16.4.2",
         "@types/react-dom": "^16.0.6",
-        "@types/react-notification-system": "^0.2.37",
         "@types/react-router": "^4.0.27",
         "@types/react-router-dom": "^4.2.7",
         "action-emitter": "^0.2.1",
@@ -25,7 +24,8 @@
         "simplr-tslint": "^1.0.0-alpha.13",
         "source-map-loader": "^0.2.3",
         "tslint": "^5.10.0",
-        "typescript": "^2.9.2"
+        "typescript": "^2.9.2",
+        "simplr-flux": "^2.3.1"
     },
     "jspm": {
         "name": "simple-react",
@@ -40,7 +40,6 @@
         "dependencies": {
             "action-emitter": "npm:action-emitter@^0.2.1",
             "querystring": "npm:querystring@^0.2.0",
-            "react-notification-system": "npm:react-notification-system@^0.2.17",
             "react-router": "npm:react-router@^4.2.0",
             "react-router-dom": "npm:react-router-dom@^4.2.2",
             "react-toastify": "npm:react-toastify@^4.1.0",
@@ -103,7 +102,5 @@
             }
         }
     },
-    "dependencies": {
-        "simplr-flux": "^2.3.1"
-    }
+    "dependencies": {}
 }
