@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Container } from "flux/utils";
+import { Abstractions } from "simplr-flux";
 
 import { RecipesReduceStore } from "./recipes-store";
-import { Abstractions } from "simplr-flux";
 import { RecipesItemContainer } from "./recipes-item-container";
 import { Spinner } from "./spinner/spinner";
 

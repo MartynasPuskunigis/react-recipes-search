@@ -3,10 +3,10 @@ import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
 import { RecipesMapStore } from "./recipes-map-store";
-import { RecipesItemView } from "./components/recipes-item-view";
-import { Recipe } from "./contracts/Recipe";
 import { FavRecipesReduceStore } from "./fav-recipes-store";
+import { RecipesItemView } from "./components/recipes-item-view";
 import { Spinner } from "./spinner/spinner";
+import { Recipe } from "./contracts/Recipe";
 
 interface Props {
     recipeId: string;
