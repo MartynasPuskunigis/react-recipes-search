@@ -1,10 +1,9 @@
 import * as React from "react";
-import * as Toastify from "react-toastify";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-import { RecipesActionsCreators } from "./../recipes-actions-creators";
-
-import { Recipe } from "./../contracts/Recipe";
+import { RecipesActionsCreators } from "../recipes-actions-creators";
+import { Recipe } from "../contracts/Recipe";
 
 interface Props {
     recipe: Recipe;
@@ -13,17 +12,17 @@ interface Props {
 
 export class RecipesItemView extends React.Component<Props> {
     private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
+        let notificationText: string = "";
         if (this.props.isFavorite) {
-            Toastify.toast.success("Recipe removed from favorites", {
-                position: Toastify.toast.POSITION.BOTTOM_RIGHT
-            });
+            notificationText = "Recipe removed from favorites";
             RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
         } else {
-            Toastify.toast.success("Recipe added to favorites", {
-                position: Toastify.toast.POSITION.BOTTOM_RIGHT
-            });
+            notificationText = "Recipe added to favorites";
             RecipesActionsCreators.addRecipeToFavourites(recipeId);
         }
+        toast.success(notificationText, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
     }
 
     public render(): JSX.Element | JSX.Element[] {
