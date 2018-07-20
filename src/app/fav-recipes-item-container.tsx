@@ -2,10 +2,10 @@ import * as React from "react";
 import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
-import { Recipe } from "./contracts/Recipe";
-import { FavRecipesItemView } from "./components/fav-recipe-item-view";
 import { FavRecipesReduceStore } from "./fav-recipes-store";
 import { RecipesMapStore } from "./recipes-map-store";
+import { FavRecipesItemView } from "./components/fav-recipe-item-view";
+import { Recipe } from "./contracts/Recipe";
 import { Spinner } from "./spinner/spinner";
 
 interface Props {
@@ -54,7 +54,6 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
                     </div>
                 );
             }
-
         }
     }
 }

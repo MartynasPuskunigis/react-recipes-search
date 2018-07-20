@@ -1,11 +1,8 @@
 import * as React from "react";
 import { Container } from "flux/utils";
-//import { Abstractions } from "simplr-flux";
 
 import { FavRecipesReduceStore } from "./fav-recipes-store";
 import { FavRecipesItemContainer } from "./fav-recipes-item-container";
-//import { Spinner } from "./spinner/spinner";
-//import { Recipe } from "./contracts/Recipe";
 
 interface State {
     recipesIds: string[];

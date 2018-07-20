@@ -3,10 +3,10 @@ import { Container } from "flux/utils";
 import { Abstractions } from "simplr-flux";
 
 import { RecipesMapStore } from "./recipes-map-store";
-import { RecipesItemView } from "./components/recipes-item-view";
-import { Recipe } from "./contracts/Recipe";
 import { FavRecipesReduceStore } from "./fav-recipes-store";
+import { RecipesItemView } from "./components/recipes-item-view";
 import { Spinner } from "./spinner/spinner";
+import { Recipe } from "./contracts/Recipe";
 
 interface Props {
     recipeId: string;
@@ -34,11 +34,11 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
         switch (this.state.recipe.Status) {
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite}/>;
+                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite} />;
                 }
             }
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner/>;
+                return <Spinner />;
             }
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.NoData: {
@@ -47,11 +47,13 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load... <span><button>Retry...</button></span>
+                        Failed to load...{" "}
+                        <span>
+                            <button>Retry...</button>
+                        </span>
                     </div>
                 );
             }
-
         }
     }
 }

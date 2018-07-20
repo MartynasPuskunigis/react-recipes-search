@@ -1,9 +1,6 @@
 import { ReduceStore } from "simplr-flux";
 
-import {
-    RemoveRecipeFromFavoriteListAction,
-    AddRecipeToFavoriteListAction
-} from "./recipes-actions";
+import { RemoveRecipeFromFavoriteListAction, AddRecipeToFavoriteListAction } from "./recipes-actions";
 
 interface StoreState {
     favRecipes: string[];
@@ -17,16 +14,6 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onDeleteFavorite(action: AddRecipeToFavoriteListAction, state: StoreState): StoreState {
-        // for (let i = 0; i < localStorage.length; i++) {
-        //     const key = localStorage.key(i);
-        //     if (key != null && localStorage.getItem(key) != null) {
-        //         const item = JSON.parse(localStorage.getItem(key)!);
-        //         favRecipes.push(item);
-        //     }
-        // }
-        // this.setState({
-        //     recipes: [...favRecipes]
-        // });
         localStorage.removeItem(action.recipeId);
         const nextState = {
             ...state
@@ -61,13 +48,12 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
                 favRecipes.push(item);
             }
         }
-        console.log(favRecipes);
         return favRecipes;
     }
 
     public getInitialState(): StoreState {
         return {
-            favRecipes: this.getLocalStorage(),
+            favRecipes: this.getLocalStorage()
         };
     }
 }

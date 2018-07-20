@@ -1,12 +1,12 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Container } from "flux/utils";
-
-import { Recipe } from "./contracts/Recipe";
-import { RecipesMapStore } from "./recipes-map-store";
 import { Abstractions } from "simplr-flux";
+
+import { RecipesMapStore } from "./recipes-map-store";
 import { ActiveRecipeView } from "./components/active-recipe-view";
 import { Spinner } from "./spinner/spinner";
+import { Recipe } from "./contracts/Recipe";
 
 interface Params {
     id: string;
@@ -33,7 +33,7 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
         switch (this.state.activeRecipe.Status) {
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner/>;
+                return <Spinner />;
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.activeRecipe.Value) {

@@ -10,7 +10,7 @@ interface Props {
 
 export class FavRecipesItemView extends React.Component<Props> {
     private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
-            RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
+        RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
     }
 
     public render(): JSX.Element | JSX.Element[] {

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Container } from "flux/utils";
+import { Abstractions } from "simplr-flux";
 
 import { RecipesReduceStore } from "./recipes-store";
-import { Abstractions } from "simplr-flux";
 import { RecipesItemContainer } from "./recipes-item-container";
 import { Spinner } from "./spinner/spinner";
 
@@ -27,7 +27,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
 
     public render(): JSX.Element | JSX.Element[] {
         if (this.state.status === Abstractions.ItemStatus.Pending) {
-            return <Spinner/>;
+            return <Spinner />;
         }
         if (this.state.recipes == null || this.state.recipes.length === 0) {
             return <div>No results found...</div>;

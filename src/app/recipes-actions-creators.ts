@@ -8,7 +8,7 @@ import {
     RemoveRecipeFromFavoriteListAction
 } from "./recipes-actions";
 import { Recipes } from "./contracts/Recipes";
-import { API_KEY } from "./index";
+import { API_KEY } from "./shared/apikey";
 
 export namespace RecipesActionsCreators {
     export async function searchForRecipes(keyword: string): Promise<void> {
