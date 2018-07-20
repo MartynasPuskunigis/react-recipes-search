@@ -7,7 +7,7 @@ export class FavRecipesView extends React.Component {
 
     public render(): JSX.Element {
         return (
-            <div className="favs">
+            <div className="fav-recipes-view">
                 <div>
                     <div>These are your favorite recipes</div>
                     <Link to="/">Go to home page</Link>

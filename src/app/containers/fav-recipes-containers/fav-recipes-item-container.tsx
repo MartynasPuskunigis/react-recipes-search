@@ -4,7 +4,7 @@ import { Abstractions } from "simplr-flux";
 
 import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesMapStore } from "../../stores/recipes-map-store";
-import { FavRecipesItemView } from "../../components/fav-recipe-item-view";
+import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
 
 interface Props {
@@ -37,7 +37,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <FavRecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite}/>;
+                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={!isFavorite} />;
                 }
             }
             case Abstractions.ItemStatus.NoData: {
@@ -46,7 +46,10 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load... <span><button>Retry...</button></span>
+                        Failed to load...
+                        <span>
+                            <button>Retry...</button>
+                        </span>
                     </div>
                 );
             }

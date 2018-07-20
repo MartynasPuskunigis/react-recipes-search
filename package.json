@@ -9,6 +9,7 @@
         "start": "gulp"
     },
     "devDependencies": {
+        "@types/classnames": "^2.2.5",
         "@types/history": "^4.6.2",
         "@types/node": "^9.6.22",
         "@types/prop-types": "^15.5.3",
@@ -16,10 +17,12 @@
         "@types/react-dom": "^16.0.6",
         "@types/react-router": "^4.0.27",
         "@types/react-router-dom": "^4.2.7",
+        "@types/react-tooltip": "^3.3.5",
         "action-emitter": "^0.2.1",
         "jspm": "^0.17.0-beta.48",
         "pushstate-server": "^3.0.1",
         "react-toastify": "^4.1.0",
+        "simplr-flux": "^2.3.0",
         "simplr-gulp": "^2.8.3",
         "simplr-tslint": "^1.0.0-alpha.13",
         "source-map-loader": "^0.2.3",
@@ -39,10 +42,12 @@
         },
         "dependencies": {
             "action-emitter": "npm:action-emitter@^0.2.1",
+            "classnames": "npm:classnames@^2.2.6",
             "querystring": "npm:querystring@^0.2.0",
             "react-router": "npm:react-router@^4.2.0",
             "react-router-dom": "npm:react-router-dom@^4.2.2",
             "react-toastify": "npm:react-toastify@^4.1.0",
+            "react-tooltip": "npm:react-tooltip@^3.6.1",
             "simplr-flux": "npm:simplr-flux@^2.3.0"
         },
         "devDependencies": {},
