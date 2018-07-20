@@ -54,7 +54,7 @@ export class RecipesItemView extends React.Component<Props> {
                         />
                     )}
                 </div>
-                <Link className="recipe-buttons" to={`/recipe/${this.props.recipe.recipe_id}`}>
+                <Link to={`/recipe/${this.props.recipe.recipe_id}`} className="recipe-buttons">
                     View Recipe
                 </Link>
             </div>

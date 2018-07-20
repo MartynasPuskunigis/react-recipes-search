@@ -1,12 +1,12 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Container } from "flux/utils";
-import { Abstractions } from "simplr-flux";
 
-import { RecipesMapStore } from "../stores/recipes-map-store";
-import { ActiveRecipeView } from "../components/active-recipe/active-recipe-view";
-import { Spinner } from "../spinner/spinner";
-import { Recipe } from "../contracts/Recipe";
+import { Recipe } from "./contracts/Recipe";
+import { RecipesMapStore } from "./stores/recipes-map-store";
+import { Abstractions } from "simplr-flux";
+import { ActiveRecipeView } from "./components/active-recipe/active-recipe-view";
+import { Spinner } from "./spinner/spinner";
 
 interface Params {
     id: string;
@@ -29,15 +29,11 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
         };
     }
 
-    private onRetryClick(event: React.MouseEvent<HTMLButtonElement>, recipeId: string): void {
-        RecipesMapStore.InvalidateCache(recipeId);
-    }
-
     public render(): JSX.Element | JSX.Element[] {
         switch (this.state.activeRecipe.Status) {
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner />;
+                return <Spinner/>;
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.activeRecipe.Value) {
@@ -50,9 +46,9 @@ class ActiveRecipeContainerClass extends React.Component<Props, State> {
             case Abstractions.ItemStatus.Failed: {
                 return (
                     <div>
-                        Failed to load...
+                        Failed to load...{" "}
                         <span>
-                            <button onClick={event => this.onRetryClick(event, this.props.match.params.id)}>Retry...</button>
+                            <button>Retry...</button>
                         </span>
                     </div>
                 );

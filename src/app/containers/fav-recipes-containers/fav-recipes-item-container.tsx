@@ -28,6 +28,10 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
         };
     }
 
+    private onRetryClick(event: React.MouseEvent<HTMLButtonElement>, recipeId: string): void {
+        RecipesMapStore.InvalidateCache(recipeId);
+    }
+
     public render(): JSX.Element {
         const isFavorite = this.state.favRecipes.indexOf(this.props.recipeId) > -1;
         switch (this.state.recipe.Status) {
@@ -48,7 +52,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
                     <div>
                         Failed to load...
                         <span>
-                            <button>Retry...</button>
+                            <button onClick={event => this.onRetryClick(event, this.props.recipeId)}>Retry...</button>
                         </span>
                     </div>
                 );
