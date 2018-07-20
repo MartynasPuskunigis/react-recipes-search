@@ -7,7 +7,6 @@ import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
 import { Spinner } from "../../spinner/spinner";
-import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 interface Props {
     recipeId: string;
