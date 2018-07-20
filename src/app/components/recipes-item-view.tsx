@@ -23,11 +23,7 @@ export class RecipesItemView extends React.Component<Props> {
             <div className="recipes__box">
                 <img className="recipe__box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
                 <div className="recipe__text">
-                    <h5 className="recipes__title">
-                        {this.props.recipe.title.length < 20
-                            ? `${this.props.recipe.title}`
-                            : `${this.props.recipe.title.substring(0, 25)}...`}
-                    </h5>
+                    <h5 className="recipes__title">{this.props.recipe.title}</h5>
                     <p className="recipes__subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>

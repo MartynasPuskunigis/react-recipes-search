@@ -5,7 +5,7 @@ import { RecipesIdsFetchedAction, RecipesIdsLoadStartedAction, ReassignActiveRec
 interface StoreState {
     recipes: string[];
     status: Abstractions.ItemStatus;
-    activeRecipe: string;
+    activeRecipeId: string | undefined;
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -37,7 +37,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             if (state.recipes[i] === action.newRecipeId) {
                 return {
                     ...state,
-                    activeRecipe: state.recipes[i]
+                    activeRecipeId: state.recipes[i]
                 };
             }
         }
@@ -50,7 +50,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             recipes: [],
             status: Abstractions.ItemStatus.Init,
-            activeRecipe: ""
+            activeRecipeId: undefined
         };
     }
 }

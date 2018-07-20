@@ -39,11 +39,12 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
         };
     }
 
-    public getLocalStorage(): string[] {
+    public getFavRecipesIdsFromLocalStorage(): string[] {
         const favRecipes: string[] = [];
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             if (key != null && localStorage.getItem(key) != null) {
+                //Using exclamation mark because localStorage.getItem(key) != null is checked in the if statement
                 const item = localStorage.getItem(key)!;
                 favRecipes.push(item);
             }
@@ -53,7 +54,7 @@ class FavRecipesReduceStoreClass extends ReduceStore<StoreState> {
 
     public getInitialState(): StoreState {
         return {
-            favRecipes: this.getLocalStorage()
+            favRecipes: this.getFavRecipesIdsFromLocalStorage()
         };
     }
 }

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { RecipesActionsCreators } from "./../recipes-actions-creators";
-import { Recipe } from "./../contracts/Recipe";
+import { RecipesActionsCreators } from "../recipes-actions-creators";
+import { Recipe } from "../contracts/Recipe";
 
 interface Props {
     recipeToDisplay: Recipe;
@@ -18,11 +18,7 @@ export class FavRecipesItemView extends React.Component<Props> {
             <div className="recipes__box">
                 <img className="recipe__box-img" src={this.props.recipeToDisplay.image_url} alt={this.props.recipeToDisplay.title} />
                 <div className="recipe__text">
-                    <h5 className="recipes__title">
-                        {this.props.recipeToDisplay.title.length < 20
-                            ? `${this.props.recipeToDisplay.title}`
-                            : `${this.props.recipeToDisplay.title.substring(0, 25)}...`}
-                    </h5>
+                    <h5 className="recipes__title">{this.props.recipeToDisplay.title}</h5>
                     <p className="recipes__subtitle">
                         Publisher: <span>{this.props.recipeToDisplay.publisher}</span>
                     </p>

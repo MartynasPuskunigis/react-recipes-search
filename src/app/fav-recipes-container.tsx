@@ -22,10 +22,13 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public render(): JSX.Element | JSX.Element[] {
-        const recipeList = this.state.recipesIds.map((recipeId, index) => (
-            <FavRecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
-        ));
-        return <div className="recipe-list">{recipeList}</div>;
+        return (
+            <div className="recipe-list">
+                {this.state.recipesIds.map((recipeId, index) => (
+                    <FavRecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+                ))}
+            </div>
+        );
     }
 }
 export const FavRecipesContainer = Container.create(RecipesContainerClass);
