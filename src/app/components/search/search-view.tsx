@@ -1,19 +1,18 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { DebounceInput } from "react-debounce-input";
 
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 export class SearchView extends React.Component {
-    protected onSearchBoxActivated: React.KeyboardEventHandler<HTMLInputElement> = event => {
-        if (event.key === "Enter") {
-            RecipesActionsCreators.searchForRecipes(event.currentTarget.value);
-        }
+    protected onSearchBoxChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+        RecipesActionsCreators.searchForRecipes(event.target.value);
     };
 
     public render(): JSX.Element {
         return (
             <div>
-                <input onKeyPress={this.onSearchBoxActivated} type="text" placeholder="Search for a recipe..." />
+                <DebounceInput minLength={2} debounceTimeout={500} onChange={this.onSearchBoxChange} />
                 <Link to="/favorites">My favorites</Link>
             </div>
         );

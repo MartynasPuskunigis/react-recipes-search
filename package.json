@@ -27,7 +27,9 @@
         "simplr-tslint": "^1.0.0-alpha.13",
         "source-map-loader": "^0.2.3",
         "tslint": "^5.10.0",
-        "typescript": "^2.9.2"
+        "typescript": "^2.9.2",
+        "react": "^16.4.1",
+        "react-debounce-input": "^3.2.0"
     },
     "jspm": {
         "name": "simple-react",
@@ -43,6 +45,7 @@
             "action-emitter": "npm:action-emitter@^0.2.1",
             "classnames": "npm:classnames@^2.2.6",
             "querystring": "npm:querystring@^0.2.0",
+            "react-debounce-input": "npm:react-debounce-input@^3.2.0",
             "react-router": "npm:react-router@^4.2.0",
             "react-router-dom": "npm:react-router-dom@^4.2.2",
             "react-toastify": "npm:react-toastify@^4.1.0",

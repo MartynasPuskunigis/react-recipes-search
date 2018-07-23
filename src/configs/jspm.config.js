@@ -81,6 +81,7 @@ SystemJS.config({
         "npm:*.json"
     ],
     map: {
+        "react-debounce-input": "npm:react-debounce-input@3.2.0",
         "classnames": "npm:classnames@2.2.6",
         "action-emitter": "npm:action-emitter@0.2.1",
         "assert": "npm:jspm-nodelibs-assert@0.2.1",
@@ -574,6 +575,12 @@ SystemJS.config({
         "npm:iconv-lite@0.4.23": {
             "map": {
                 "safer-buffer": "npm:safer-buffer@2.1.2"
+            }
+        },
+        "npm:react-debounce-input@3.2.0": {
+            "map": {
+                "lodash.debounce": "npm:lodash.debounce@4.0.8",
+                "prop-types": "npm:prop-types@15.6.2"
             }
         }
     }
