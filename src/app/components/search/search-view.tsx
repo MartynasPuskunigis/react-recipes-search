@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
+import { AppHistory } from "../router/app-history";
 
 export class SearchView extends React.Component {
     protected onSearchBoxActivated: React.KeyboardEventHandler<HTMLInputElement> = event => {
         if (event.key === "Enter") {
-            RecipesActionsCreators.searchForRecipes(event.currentTarget.value);
+            AppHistory.push({ pathname: `/recipes/${event.currentTarget.value}` });
         }
     };
 
