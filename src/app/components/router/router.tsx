@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { HomeView } from "../home/home-view";
 import { HeaderView } from "../header/header-view";
+import { FooterView } from "../footer/footer-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 
@@ -17,6 +18,7 @@ export class Router extends React.Component {
                         <Route path="/recipe/:id" component={ActiveRecipeContainer} />
                         <Route path="/favorites" component={FavRecipesView} />
                     </Switch>
+                    <FooterView />
                 </div>
             </BrowserRouter>
         );
