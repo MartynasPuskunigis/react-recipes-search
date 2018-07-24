@@ -7,17 +7,21 @@ import { FooterView } from "../footer/footer-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 
+import "./router.css";
+
 export class Router extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <BrowserRouter>
-                <div>
+                <div className="router">
                     <HeaderView />
-                    <Switch>
-                        <Route path="/" component={HomeView} exact />
-                        <Route path="/recipe/:id" component={ActiveRecipeContainer} />
-                        <Route path="/favorites" component={FavRecipesView} />
-                    </Switch>
+                    <div className="content">
+                        <Switch>
+                            <Route path="/" component={HomeView} exact />
+                            <Route path="/recipe/:id" component={ActiveRecipeContainer} />
+                            <Route path="/favorites" component={FavRecipesView} />
+                        </Switch>
+                    </div>
                     <FooterView />
                 </div>
             </BrowserRouter>
