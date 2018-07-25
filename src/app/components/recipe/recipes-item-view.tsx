@@ -41,28 +41,30 @@ export class RecipesItemView extends React.Component<Props> {
                     }}
                 />
                 <div className="recipe-text">
-                    <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
-                        {this.props.recipe.title}
-                    </a>
-                    <ReactTooltip id={`${this.props.recipe.recipe_id}`} type="dark" effect="float">
-                        <span>{this.props.recipe.title}</span>
-                    </ReactTooltip>
+                    <div className="recipe-header">
+                        <div
+                            className={classNames(
+                                {
+                                    "far fa-star": !this.props.isFavorite,
+                                    "fas fa-star": this.props.isFavorite
+                                },
+                                {
+                                    "star-icon-empty": !this.props.isFavorite,
+                                    "star-icon-full": this.props.isFavorite
+                                }
+                            )}
+                            onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
+                        />
+                        <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
+                            {this.props.recipe.title}
+                        </a>
+                        <ReactTooltip id={`${this.props.recipe.recipe_id}`} type="dark" effect="float">
+                            <span>{this.props.recipe.title}</span>
+                        </ReactTooltip>
+                    </div>
                     <p className="recipes-subtitle">
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
-                    <div
-                        className={classNames(
-                            {
-                                "far fa-star": !this.props.isFavorite,
-                                "fas fa-star": this.props.isFavorite
-                            },
-                            {
-                                "star-icon-empty": !this.props.isFavorite,
-                                "star-icon-full": this.props.isFavorite
-                            }
-                        )}
-                        onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
-                    />
                 </div>
                 <Link to={`/recipe/${this.props.recipe.recipe_id}`} className="recipe-buttons">
                     View Recipe
