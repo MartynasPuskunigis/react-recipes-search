@@ -32,7 +32,14 @@ export class RecipesItemView extends React.Component<Props> {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="recipes-item-view">
-                <img className="recipe-box-img" src={this.props.recipe.image_url} alt={this.props.recipe.title} />
+                <img
+                    className="recipe-box-img"
+                    src={this.props.recipe.image_url}
+                    alt={this.props.recipe.title}
+                    onError={event => {
+                        event.currentTarget.src = "../../../assets/recipe-placeholder.png";
+                    }}
+                />
                 <div className="recipe-text">
                     <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
                         {this.props.recipe.title}
