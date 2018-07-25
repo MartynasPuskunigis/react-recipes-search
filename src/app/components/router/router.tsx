@@ -7,7 +7,7 @@ import { RecipesView } from "../recipe/recipes-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 
-export class RouterClass extends React.Component {
+export class AppRouter extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <Router history={AppHistory}>

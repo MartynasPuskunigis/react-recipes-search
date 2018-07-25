@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ToastContainer } from "react-toastify";
 
-import { RouterClass } from "./components/router/router";
+import { AppRouter } from "./components/router/router";
 
 import "./styles/main.css";
 import "./styles/index.css";
@@ -12,7 +12,7 @@ class App extends React.Component {
         return (
             <div>
                 <ToastContainer />
-                <RouterClass />
+                <AppRouter />
             </div>
         );
     }
