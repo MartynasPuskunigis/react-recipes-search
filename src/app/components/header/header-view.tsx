@@ -7,8 +7,8 @@ export class HeaderView extends React.Component {
     public render(): JSX.Element {
         return (
             <div className="header-view">
-                <div className="navigation">
-                    <div className="wrapper">
+                <div className="wrapper">
+                    <div className="navigation">
                         <Link className="header-button" to="/">
                             Find recipes
                         </Link>

@@ -26,7 +26,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
         return {
             ...state,
-            recipes: action.getRecipes,
+            recipes: [...action.getRecipes],
             status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData
         };
     }
