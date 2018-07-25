@@ -18,10 +18,10 @@ export class RecipesItemView extends React.Component<Props> {
     private handleFavoriteClick(event: React.MouseEvent<HTMLDivElement>, recipeId: string): void {
         let notificationText: string = "";
         if (this.props.isFavorite) {
-            notificationText = "Recipe removed from favorites";
+            notificationText = `${this.props.recipe.title} was removed from favorites`;
             RecipesActionsCreators.removeRecipeFromFavourites(recipeId);
         } else {
-            notificationText = "Recipe added to favorites";
+            notificationText = `${this.props.recipe.title} was added to favorites`;
             RecipesActionsCreators.addRecipeToFavourites(recipeId);
         }
         toast.success(notificationText, {
