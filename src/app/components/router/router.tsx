@@ -1,23 +1,19 @@
 import * as React from "react";
-import { Switch, Route, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import { AppHistory } from "./app-history";
-import { HomeView } from "../home/home-view";
-import { RecipesView } from "../recipe/recipes-view";
-import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
-import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
+import { ContentLayoutView } from "./content-layout";
+import { HeaderView } from "../header/header-view";
+import { FooterView } from "../footer/footer-view";
 
 export class AppRouter extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <Router history={AppHistory}>
-                <div>
-                    <HomeView />
-                    <Switch>
-                        <Route path="/recipe/:id" component={ActiveRecipeContainer} />
-                        <Route path="/favorites" component={FavRecipesView} />
-                        <Route path="/recipes/:searchQuery" component={RecipesView} />
-                    </Switch>
+                <div className="page-layout">
+                    <HeaderView />
+                    <ContentLayoutView />
+                    <FooterView />
                 </div>
             </Router>
         );
