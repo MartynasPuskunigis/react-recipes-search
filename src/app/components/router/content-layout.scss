@@ -1,3 +1,5 @@
+$height-to-fit-footer-on-page: 105px;
+
 .content-layout {
-    min-height: calc(100vh - 105px);
+    min-height: calc(100vh - #{$height-to-fit-footer-on-page});
 }

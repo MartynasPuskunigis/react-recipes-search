@@ -5,7 +5,7 @@ import { HomeView } from "../home/home-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 
-import "./router.css";
+import "./content-layout.css";
 
 export class ContentLayoutView extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
