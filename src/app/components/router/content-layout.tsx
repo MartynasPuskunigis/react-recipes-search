@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import { NotFoundView } from "../notfound/not-found-view";
 import { RecipesView } from "../recipe/recipes-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
@@ -12,10 +13,11 @@ export class ContentLayoutView extends React.Component {
         return (
             <div className="content-layout">
                 <Switch>
-                    <Route path="/" component={RecipesView} exact/>
+                    <Route path="/" component={RecipesView} exact />
                     <Route path="/recipe/:id" component={ActiveRecipeContainer} />
                     <Route path="/favorites" component={FavRecipesView} />
                     <Route path="/recipes/:searchQuery" component={RecipesView} />
+                    <Route component={NotFoundView} />
                 </Switch>
             </div>
         );
