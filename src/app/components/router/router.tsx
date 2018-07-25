@@ -1,19 +1,21 @@
 import * as React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import { HomeView } from "../home/home-view";
-import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
-import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
+import { ContentLayoutView } from "./content-layout";
+import { HeaderView } from "../header/header-view";
+import { FooterView } from "../footer/footer-view";
+
+import "./router.css";
 
 export class Router extends React.Component {
     public render(): JSX.Element | JSX.Element[] {
         return (
             <BrowserRouter>
-                <Switch>
-                    <Route path="/" component={HomeView} exact />
-                    <Route path="/recipe/:id" component={ActiveRecipeContainer} />
-                    <Route path="/favorites" component={FavRecipesView} />
-                </Switch>
+                <div className="page-layout">
+                    <HeaderView />
+                    <ContentLayoutView />
+                    <FooterView />
+                </div>
             </BrowserRouter>
         );
     }
