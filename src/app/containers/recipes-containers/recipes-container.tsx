@@ -6,10 +6,10 @@ import { RecipesItemContainer } from "./recipes-item-container";
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { NoDataView } from "../../components/nodata/no-data-view";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
-import { NoDataView } from "../../components/nodata/no-data-view";
 
 interface State {
     recipesIds: string[];
