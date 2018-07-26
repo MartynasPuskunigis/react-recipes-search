@@ -9,6 +9,7 @@ import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
+import { NoDataView } from "../../components/nodata/no-data-view";
 
 interface State {
     recipesIds: string[];
@@ -37,7 +38,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
     public render(): JSX.Element | JSX.Element[] {
         switch (this.state.status) {
             case Abstractions.ItemStatus.Init: {
-                return <div>Search not initialized...</div>;
+                RecipesActionsCreators.searchForRecipes("");
             }
             case Abstractions.ItemStatus.Pending: {
                 return <Spinner />;
@@ -52,7 +53,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
                 );
             }
             case Abstractions.ItemStatus.NoData: {
-                return <div>No results found...</div>;
+                return <NoDataView />;
             }
             case Abstractions.ItemStatus.Failed: {
                 return (
