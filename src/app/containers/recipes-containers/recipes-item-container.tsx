@@ -6,7 +6,6 @@ import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
-import { Spinner } from "../../spinner/spinner";
 
 interface Props {
     recipeId: string;
@@ -38,11 +37,11 @@ class RecipesItemContainerClass extends React.Component<Props, State> {
         switch (this.state.recipe.Status) {
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner />;
+                return <RecipesItemView/>;
             }
             case Abstractions.ItemStatus.Loaded: {
                 if (this.state.recipe.Value) {
-                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite} />;
+                    return <RecipesItemView recipe={this.state.recipe.Value} isFavorite={isFavorite}/>;
                 }
             }
             case Abstractions.ItemStatus.NoData: {
