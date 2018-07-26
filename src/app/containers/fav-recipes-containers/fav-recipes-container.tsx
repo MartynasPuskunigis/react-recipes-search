@@ -25,8 +25,8 @@ class RecipesContainerClass extends React.Component<{}, State> {
         if (this.state.recipesIds == null || this.state.recipesIds.length === 0) {
             return <div>You have no favorite recipes...</div>;
         }
-        const recipeList = this.state.recipesIds.map((recipeId, index) => (
-            <FavRecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+        const recipeList = this.state.recipesIds.map(recipeId => (
+            <FavRecipesItemContainer key={`recipe-item-${recipeId}`} recipeId={recipeId} />
         ));
         return <div className="recipe-list">{recipeList}</div>;
     }
