@@ -1,5 +1,4 @@
 import * as React from "react";
-//import { Link } from "react-router-dom";
 
 import { Recipe } from "../../contracts/Recipe";
 
@@ -46,9 +45,6 @@ export class ActiveRecipeView extends React.Component<Props> {
                                                 <a href={this.props.recipeToDisplay.source_url}> Check out recipe here!</a>
                                             </span>
                                         </div>
-                                        {/* <Link className="active-recipe-button" to="/">
-                                        Go Home
-                                    </Link> */}
                                     </div>
                                 </div>
                             </div>
