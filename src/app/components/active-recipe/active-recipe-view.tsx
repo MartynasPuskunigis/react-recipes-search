@@ -10,6 +10,10 @@ interface Props {
 }
 
 export class ActiveRecipeView extends React.Component<Props> {
+    public componentDidMount(): void {
+        window.scrollTo(0, 0);
+    }
+
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="active-recipe-view">
