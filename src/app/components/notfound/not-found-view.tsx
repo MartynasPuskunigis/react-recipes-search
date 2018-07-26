@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./not-found-view.css";
 
-export class NotFoundView extends React.Component {
+export class PageNotFoundView extends React.Component {
     public render(): JSX.Element {
         return (
             <div className="not-found-view">
