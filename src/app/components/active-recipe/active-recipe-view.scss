@@ -22,23 +22,76 @@ $ingredients-list-color: #9acd32;
         }
 
         .recipe-details {
-            display: flex;
-            flex-direction: row;
+            background: url("../../../assets/pizza.jpg") center center no-repeat;
+            background-size: cover;
 
-            .ingredients-box,
-            .recipe-info {
-                padding: 0 70px;
-            }
+            .wrapper {
+                display: flex;
+                flex-direction: row;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 10px 0;
 
-            .ingredients-list-header {
-                padding: 20px 10px;
-                text-align: center;
-                background-color: $ingredients-list-color;
-                color: white;
-            }
-            .ingredients-list {
-                padding: 10px 10px;
-                border: 5px solid $ingredients-list-color;
+                .ingredients-box {
+                    padding: 0 70px;
+
+                    .ingredients-list-header {
+                        padding: 20px 10px;
+                        text-align: center;
+                        background-color: $ingredients-list-color;
+                        color: white;
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+
+                    .ingredients-list {
+                        padding: 10px 10px;
+                        border: 5px solid $ingredients-list-color;
+                        background-color: white;
+                    }
+                }
+                .recipe-info {
+                    padding-right: 40px;
+
+                    .wrapper {
+                        border: 2px solid #008000;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0 70px;
+
+                        .active-recipe-publisher,
+                        .active-recipe-website,
+                        .active-recipe-button {
+                            color: white;
+                        }
+
+                        .active-recipe-publisher {
+                            font-size: 30px;
+                            padding: 30px 0;
+                        }
+
+                        .active-recipe-website {
+                            font-size: 28px;
+                            padding-bottom: 30px;
+
+                            a {
+                                text-decoration: none;
+                                color: #228B22;
+                                transition-duration: 350ms;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                    background-color: #ADFF2F;
+                                }
+                            }
+                        }
+
+                        .active-recipe-button {
+                            font-size: 25px;
+                        }
+                    }
+                }
             }
         }
     }
