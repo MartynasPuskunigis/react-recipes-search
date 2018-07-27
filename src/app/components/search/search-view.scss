@@ -5,12 +5,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
     width: 100%;
     height: 350px;
     background: url("../../../assets/search-banner-background.jpg") center center no-repeat;
-    background-position: 0 -200px;
-    background-size: cover;
+    background-position: 50% calc(50% - 220px);
+    // @media all and (max-width: 1199px) {
+    //     width: 1199px;
+    // }
+    // @media all and (max-width: 991px) {
+    //     width: 991px;
+    // }
+    // @media all and (max-width: 768px) {
+    //     width: 768px;
+    // }
+    // @media all and (max-width: 575px) {
+    //     width: 575px;
+    // }
 
     .wrapper {
         width: 100%;
@@ -45,7 +55,7 @@
         }
 
         .search-wrapper {
-            min-width: 500px;
+            width: 500px;
             padding: 15px 170px;
             display: flex;
             justify-content: center;
@@ -53,7 +63,7 @@
             background: rgba(0, 0, 0, 0.6);
 
             .search-input {
-                min-width: 480px;
+                width: 480px;
                 border: none;
                 border-radius: 8px;
                 padding: 10px 5px;
