@@ -35,10 +35,14 @@ class RecipesContainerClass extends React.Component<{}, State> {
         RecipesActionsCreators.invalidateEntireCache();
     };
 
+    public componentDidMount(): void {
+        RecipesActionsCreators.searchForRecipes("");
+    }
+
     public render(): JSX.Element | JSX.Element[] {
         switch (this.state.status) {
             case Abstractions.ItemStatus.Init: {
-                RecipesActionsCreators.searchForRecipes("");
+                return <div />;
             }
             case Abstractions.ItemStatus.Pending: {
                 return <Spinner />;
