@@ -31,14 +31,14 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             return {
                 ...state,
                 recipes: state.recipes.concat(action.getRecipes),
-                status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData,
+                status: Abstractions.ItemStatus.Loaded,
                 searchKeyword: action.getSearchQuery,
                 currentPage: state.currentPage + 1
             };
         } else {
             return {
                 ...state,
-                status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData,
+                status: Abstractions.ItemStatus.Loaded,
                 searchKeyword: action.getSearchQuery,
                 currentPage: state.currentPage + 1,
                 moreRecipes: false

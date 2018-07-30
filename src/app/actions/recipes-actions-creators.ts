@@ -6,7 +6,8 @@ import {
     ReassignActiveRecipeAction,
     AddRecipeToFavoriteListAction,
     RemoveRecipeFromFavoriteListAction,
-    InvalidateEntireCache
+    InvalidateEntireCache,
+    RecipeIdsLoadFailedAction
 } from "./recipes-actions";
 import { Recipes } from "../contracts/Recipes";
 import { API_KEY } from "../shared/apikey";
@@ -26,7 +27,7 @@ export namespace RecipesActionsCreators {
             const dataIds = await response.recipes.map(x => x.recipe_id);
             Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds, keyword));
         } catch (error) {
-            console.error("Failed to search for recipe", error);
+            Dispatcher.dispatch(new RecipeIdsLoadFailedAction());
         }
     }
 

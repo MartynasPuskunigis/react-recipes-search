@@ -12,6 +12,8 @@ export class RecipesIdsFetchedAction {
 
 export class RecipesIdsLoadStartedAction {}
 
+export class RecipeIdsLoadFailedAction {}
+
 export class ReassignActiveRecipeAction {
     constructor(private id: string) {}
 
