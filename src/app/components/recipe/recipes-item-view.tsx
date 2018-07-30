@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactTooltip from "react-tooltip";
-import * as classNames from "classnames";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -43,16 +42,7 @@ export class RecipesItemView extends React.Component<Props> {
                 <div className="recipe-text">
                     <div className="recipe-header">
                         <div
-                            className={classNames(
-                                {
-                                    "far fa-star": !this.props.isFavorite,
-                                    "fas fa-star": this.props.isFavorite
-                                },
-                                {
-                                    "star-icon-empty": !this.props.isFavorite,
-                                    "star-icon-full": this.props.isFavorite
-                                }
-                            )}
+                            className={this.props.isFavorite ? "far fa-star star-icon-empty" : "fas fa-star star-icon-full"}
                             onClick={event => this.handleFavoriteClick(event, this.props.recipe.recipe_id)}
                         />
                         <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>

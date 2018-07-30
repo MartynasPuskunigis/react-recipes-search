@@ -9,7 +9,6 @@
         "start": "gulp"
     },
     "devDependencies": {
-        "@types/classnames": "^2.2.5",
         "@types/history": "^4.6.2",
         "@types/node": "^9.6.22",
         "@types/prop-types": "^15.5.3",
@@ -43,7 +42,6 @@
         },
         "dependencies": {
             "action-emitter": "npm:action-emitter@^0.2.1",
-            "classnames": "npm:classnames@^2.2.6",
             "querystring": "npm:querystring@^0.2.0",
             "react-debounce-input": "npm:react-debounce-input@^3.2.0",
             "react-router": "npm:react-router@^4.2.0",

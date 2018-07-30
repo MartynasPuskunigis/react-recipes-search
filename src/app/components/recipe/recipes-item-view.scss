@@ -1,6 +1,6 @@
 .recipes-item-view {
     background: #fff;
-    padding-bottom: 2rem;
+    padding-bottom: 20px;
     border-radius: 5px;
     box-shadow: -1px 2px 34px -13px rgba(0, 0, 0, 0.75);
     display: flex;
@@ -29,8 +29,8 @@
             .recipes-title {
                 color: #e74c3c;
                 text-transform: uppercase;
-                font-size: 1.1rem;
-                padding: 1.8rem 0 0.2rem 0;
+                font-size: 20px;
+                padding: 25px 0 20px 0;
             }
 
             .star-icon-empty,
@@ -54,13 +54,13 @@
         .recipes-subtitle {
             text-transform: uppercase;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 18px;
             letter-spacing: 2px;
 
             span {
                 text-transform: none;
                 font-weight: 400;
-                font-size: 0.8rem;
+                font-size: 16px;
                 letter-spacing: 1px;
             }
         }
@@ -69,9 +69,9 @@
     .recipe-buttons {
         border: solid 2px #e74c3c;
         background: transparent;
-        padding: 0.4rem 0.6rem;
+        padding: 10px 15px;
         border-radius: 8px;
-        font-size: 0.8rem;
+        font-size: 20px;
         text-transform: uppercase;
         font-weight: bold;
         text-decoration: none;
