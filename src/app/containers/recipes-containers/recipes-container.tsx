@@ -6,6 +6,7 @@ import { RecipesItemContainer } from "./recipes-item-container";
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 import { RecipesReduceStore } from "../../stores/recipes-store";
 import { RecipesMapStore } from "../../stores/recipes-map-store";
+import { NoDataView } from "../../components/nodata/no-data-view";
 import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
@@ -34,10 +35,14 @@ class RecipesContainerClass extends React.Component<{}, State> {
         RecipesActionsCreators.invalidateEntireCache();
     };
 
+    public componentDidMount(): void {
+        RecipesActionsCreators.searchForRecipes("");
+    }
+
     public render(): JSX.Element | JSX.Element[] {
         switch (this.state.status) {
             case Abstractions.ItemStatus.Init: {
-                return <div>Search not initialized...</div>;
+                return <div />;
             }
             case Abstractions.ItemStatus.Pending: {
                 return <Spinner />;
@@ -52,7 +57,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
                 );
             }
             case Abstractions.ItemStatus.NoData: {
-                return <div>No results found...</div>;
+                return <NoDataView />;
             }
             case Abstractions.ItemStatus.Failed: {
                 return (
