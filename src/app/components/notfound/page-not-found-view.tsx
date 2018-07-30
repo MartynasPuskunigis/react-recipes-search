@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import "./not-found-view.css";
+import "./page-not-found-view.css";
 
 export class PageNotFoundView extends React.Component {
     public render(): JSX.Element {
         return (
-            <div className="not-found-view">
+            <div className="page-not-found-view">
                 <div className="wrapper">
                     <div className="fas fa-car-crash not-found-img" />
                     <div className="status-code">404</div>

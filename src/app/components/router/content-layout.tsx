@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { RecipesView } from "../recipe/recipes-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
-import { PageNotFoundView } from "../notfound/not-found-view";
+import { PageNotFoundView } from "../notfound/page-not-found-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 
 import "./content-layout.css";
