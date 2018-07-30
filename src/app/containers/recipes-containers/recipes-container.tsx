@@ -13,6 +13,9 @@ import "./recipes-container.css";
 interface State {
     recipesIds: string[];
     status: Abstractions.ItemStatus;
+    searchKeyword: string;
+    currentPage: number;
+    moreRecipes: boolean;
 }
 
 class RecipesContainerClass extends React.Component<{}, State> {
@@ -21,12 +24,44 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public static calculateState(state: State): State {
-        const { recipes, status } = RecipesReduceStore.getState();
-
+        const { recipes, status, searchKeyword, currentPage, moreRecipes } = RecipesReduceStore.getState();
         return {
             status: status,
-            recipesIds: recipes
+            recipesIds: recipes,
+            searchKeyword: searchKeyword,
+            currentPage: currentPage,
+            moreRecipes: moreRecipes
         };
+    }
+
+    public componentDidMount(): void {
+        window.addEventListener(
+            "scroll",
+            () => {
+                this.scrollHandler(this.state.searchKeyword, this.state.currentPage);
+            },
+            false
+        );
+    }
+
+    public componentWillUnmount(): void {
+        window.removeEventListener(
+            "scroll",
+            () => {
+                this.scrollHandler(this.state.searchKeyword, this.state.currentPage);
+            },
+            false
+        );
+    }
+
+    public scrollHandler(searchKeyword: string, currentPage: number): void {
+        if (
+            window.pageYOffset - document.body.scrollHeight === -635 &&
+            this.state.status === Abstractions.ItemStatus.Loaded &&
+            this.state.moreRecipes
+        ) {
+            RecipesActionsCreators.searchForRecipes(searchKeyword, currentPage + 1);
+        }
     }
 
     private onRetryClick: React.MouseEventHandler<HTMLButtonElement> = event => {
@@ -40,7 +75,14 @@ class RecipesContainerClass extends React.Component<{}, State> {
                 return <div>Search not initialized...</div>;
             }
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner />;
+                return (
+                    <div className="recipe-list">
+                        {this.state.recipesIds.map((recipeId, index) => (
+                            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+                        ))}
+                        <Spinner />
+                    </div>
+                );
             }
             case Abstractions.ItemStatus.Loaded: {
                 return (

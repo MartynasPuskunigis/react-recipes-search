@@ -1,5 +1,9 @@
 export class RecipesIdsFetchedAction {
-    constructor(private recipes: string[]) {}
+    constructor(private recipes: string[], private searchQuery: string) {}
+
+    public get getSearchQuery(): string {
+        return this.searchQuery;
+    }
 
     public get getRecipes(): string[] {
         return this.recipes;

@@ -12,6 +12,9 @@ interface StoreState {
     status: Abstractions.ItemStatus;
     activeRecipe: string;
     favoriteRecipes: string[];
+    currentPage: number;
+    searchKeyword: string;
+    moreRecipes: boolean;
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -24,11 +27,23 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
-        return {
-            ...state,
-            recipes: [...action.getRecipes],
-            status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData
-        };
+        if (action.getRecipes.length !== 0) {
+            return {
+                ...state,
+                recipes: state.recipes.concat(action.getRecipes),
+                status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData,
+                searchKeyword: action.getSearchQuery,
+                currentPage: state.currentPage + 1
+            };
+        } else {
+            return {
+                ...state,
+                status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData,
+                searchKeyword: action.getSearchQuery,
+                currentPage: state.currentPage + 1,
+                moreRecipes: false
+            };
+        }
     }
 
     private onRecipesLoading(action: RecipesIdsLoadStartedAction, state: StoreState): StoreState {
@@ -58,7 +73,10 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             recipes: [],
             status: Abstractions.ItemStatus.Init,
             activeRecipe: "",
-            favoriteRecipes: []
+            favoriteRecipes: [],
+            currentPage: 1,
+            searchKeyword: "",
+            moreRecipes: true
         };
     }
 }

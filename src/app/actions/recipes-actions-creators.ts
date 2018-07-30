@@ -12,16 +12,19 @@ import { Recipes } from "../contracts/Recipes";
 import { API_KEY } from "../shared/apikey";
 
 export namespace RecipesActionsCreators {
-    export async function searchForRecipes(keyword: string): Promise<void> {
+    export async function searchForRecipes(keyword: string, pageToSearch?: number): Promise<void> {
+        if (pageToSearch == null) {
+            pageToSearch = 1;
+        }
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
             const recipeName = keyword;
             const apiCall = await fetch(
-                `https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=5`
+                `https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&page=${pageToSearch}`
             );
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
-            Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds));
+            Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds, keyword));
         } catch (error) {
             console.error("Failed to search for recipe", error);
         }
