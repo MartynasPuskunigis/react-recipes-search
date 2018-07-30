@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/app/styles/main.css">
+    <link rel="stylesheet" href="/app/styles/starting-spinner.css">
     <script src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/tslib/1.9.0/tslib.js"></script>
     <script src="/libs/system.src.js"></script>
@@ -15,7 +16,29 @@
 
 <body>
     <div id="app-root">
-        Loading...
+        <div class="wrapper">
+            <div class="container">
+                <div class="circle">
+                    <div class="bread crust">
+                        <div class="top-bread"></div>
+                        <div class="bottom-bread"></div>
+                        <div class="bread crumb">
+                            <div class="top-bread"></div>
+                            <div class="bottom-bread"></div>
+                            <div class="spread">
+                                <div class="pb">
+                                </div>
+                                <div class="jam">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wait">
+                    <h2>Just a sec...</h2>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
