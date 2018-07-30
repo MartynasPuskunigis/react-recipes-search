@@ -45,8 +45,8 @@ class RecipesContainerClass extends React.Component<{}, State> {
             case Abstractions.ItemStatus.Loaded: {
                 return (
                     <div className="recipe-list">
-                        {this.state.recipesIds.map((recipeId, index) => (
-                            <RecipesItemContainer key={`recipe-item-${recipeId}-${index}`} recipeId={recipeId} />
+                        {this.state.recipesIds.map(recipeId => (
+                            <RecipesItemContainer key={`recipe-item-${recipeId}`} recipeId={recipeId} />
                         ))}
                     </div>
                 );

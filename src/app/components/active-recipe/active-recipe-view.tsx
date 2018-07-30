@@ -29,8 +29,8 @@ export class ActiveRecipeView extends React.Component<Props> {
                                 <div className="ingredients-box">
                                     <div className="ingredients-list-header">The ingredients you will need</div>
                                     <div className="ingredients-list">
-                                        {this.props.recipeToDisplay.ingredients.map((ingredient, index) => (
-                                            <div key={`ingredient-item-${ingredient}-${index}`}>{ingredient}</div>
+                                        {this.props.recipeToDisplay.ingredients.map(ingredient => (
+                                            <div key={`ingredient-item-${ingredient}`}>{ingredient}</div>
                                         ))}
                                     </div>
                                 </div>
