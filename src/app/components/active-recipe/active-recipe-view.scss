@@ -1,51 +1,97 @@
-.active-recipe-view {
-    display: flex;
-    justify-content: center;
-    padding-top: 60px;
+$ingredients-list-color: #9acd32;
 
+.active-recipe-view {
     .active-recipe {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .active-recipe-img {
-            height: 350px;
-            width: 500px;
-            border-radius: 50%;
-        }
+        justify-content: center;
+        padding: 20px;
 
         .active-recipe-title {
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 28px;
+            padding-bottom: 12px;
+            font-weight: bold;
         }
 
-        .active-recipe-publisher,
-        .active-recipe-website {
-            text-transform: uppercase;
-            font-size: 1.2rem;
-
-            .active-recipe-publisher span {
-                text-transform: none;
-                font-weight: 300;
-                letter-spacing: 2px;
-            }
-
-            .active-recipe-website span {
-                text-transform: lowercase;
-                font-weight: 300;
-                letter-spacing: 2px;
-                color: #e74c3c;
-            }
+        img {
+            width: 620px;
+            height: 300px;
+            margin-bottom: 12px;
+            border-radius: 4px;
         }
 
-        .active-recipe-button {
-            border: solid 2px #e74c3c;
-            background: transparent;
-            padding: 0.2rem 0.9rem;
-            border-radius: 1px;
-            font-size: 1rem;
-            text-transform: uppercase;
-            font-weight: 500;
+        .recipe-details {
+            background: url("../../../assets/pizza.jpg") center center no-repeat;
+            background-size: cover;
+
+            .wrapper {
+                display: flex;
+                flex-direction: row;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 10px 0;
+
+                .ingredients-box {
+                    padding: 0 70px;
+
+                    .ingredients-list-header {
+                        padding: 20px 10px;
+                        text-align: center;
+                        background-color: $ingredients-list-color;
+                        color: white;
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+
+                    .ingredients-list {
+                        padding: 10px 10px;
+                        border: 5px solid $ingredients-list-color;
+                        background-color: white;
+                    }
+                }
+                .recipe-info {
+                    padding-right: 40px;
+
+                    .wrapper {
+                        border: 2px solid #008000;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        padding: 0 70px;
+
+                        .active-recipe-publisher,
+                        .active-recipe-website,
+                        .active-recipe-button {
+                            color: white;
+                        }
+
+                        .active-recipe-publisher {
+                            font-size: 30px;
+                            padding: 30px 0;
+                        }
+
+                        .active-recipe-website {
+                            font-size: 28px;
+                            padding-bottom: 30px;
+
+                            a {
+                                text-decoration: none;
+                                color: #228b22;
+                                transition-duration: 350ms;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                    background-color: #adff2f;
+                                }
+                            }
+                        }
+
+                        .active-recipe-button {
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
         }
     }
 }
