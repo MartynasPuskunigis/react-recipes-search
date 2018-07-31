@@ -1,0 +1,29 @@
+.no-favorites-view {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .no-favorites-img {
+            font-size: 150px;
+            padding: 35px;
+        }
+        .no-favorites-header {
+            font-size: 45px;
+            padding: 20px;
+        }
+        .no-favorites-text {
+            font-size: 30px;
+            padding: 20px;
+        }
+    }
+}

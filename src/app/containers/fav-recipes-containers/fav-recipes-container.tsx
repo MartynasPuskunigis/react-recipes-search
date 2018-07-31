@@ -3,6 +3,7 @@ import { Container } from "flux/utils";
 
 import { FavRecipesItemContainer } from "./fav-recipes-item-container";
 import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
+import { NoFavoritesView } from "../../components/nofavorites/no-favorites-view";
 
 interface State {
     recipesIds: string[];
@@ -23,7 +24,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
 
     public render(): JSX.Element | JSX.Element[] {
         if (this.state.recipesIds == null || this.state.recipesIds.length === 0) {
-            return <div>You have no favorite recipes...</div>;
+            return <NoFavoritesView />;
         }
         const recipeList = this.state.recipesIds.map(recipeId => (
             <FavRecipesItemContainer key={`recipe-item-${recipeId}`} recipeId={recipeId} />
