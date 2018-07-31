@@ -2,8 +2,7 @@
     .fav-recipes-banner {
         height: 200px;
         background: url("../../../assets/search-banner-background.jpg") center center no-repeat;
-        background-position: 0 -200px;
-        background-size: cover;
+        background-position: 50% calc(50% - 150px);
 
         .wrapper {
             background: rgba(0, 0, 0, 0.6);
