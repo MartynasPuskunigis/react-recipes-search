@@ -42,10 +42,9 @@ export class ActiveRecipeView extends React.Component<Props> {
                                 <div className="right-side">
                                     <div className="recipe-info">
                                         <div className="wrapper">
-                                            <div className="active-recipe-publisher">Publisher: {this.props.recipeToDisplay.publisher}</div>
+                                            <div className="active-recipe-publisher">Publisher:{this.props.recipeToDisplay.publisher}</div>
                                             <div className="active-recipe-website">
-                                                Website:
-                                                <a href={this.props.recipeToDisplay.source_url}>Check out recipe here!</a>
+                                                Website:<a href={this.props.recipeToDisplay.source_url}>Check out recipe here!</a>
                                             </div>
                                         </div>
                                     </div>
