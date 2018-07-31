@@ -39,22 +39,24 @@ export class ActiveRecipeView extends React.Component<Props> {
                                         ))}
                                     </div>
                                 </div>
-                                <div className="recipe-info">
-                                    <div className="wrapper">
-                                        <div className="active-recipe-publisher">
-                                            Publisher: <span>{this.props.recipeToDisplay.publisher}</span>
-                                        </div>
-                                        <div className="active-recipe-website">
-                                            Website:
-                                            <span>
-                                                <a href={this.props.recipeToDisplay.source_url}> Check out recipe here!</a>
-                                            </span>
+                                <div className="right-side">
+                                    <div className="recipe-info">
+                                        <div className="wrapper">
+                                            <div className="active-recipe-publisher">
+                                                Publisher: <span>{this.props.recipeToDisplay.publisher}</span>
+                                            </div>
+                                            <div className="active-recipe-website">
+                                                Website:
+                                                <span>
+                                                    <a href={this.props.recipeToDisplay.source_url}> Check out recipe here!</a>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button className="go-back" onClick={this.onGoBackClick}>
+                                        Go back
+                                    </button>
                                 </div>
-                                <button className="go-back" onClick={this.onGoBackClick}>
-                                    Go back
-                                </button>
                             </div>
                         </div>
                     </div>
