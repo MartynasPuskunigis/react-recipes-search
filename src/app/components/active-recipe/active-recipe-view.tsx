@@ -48,7 +48,7 @@ export class ActiveRecipeView extends React.Component<Props> {
                                             <div className="active-recipe-website">
                                                 Website:
                                                 <span>
-                                                    <a href={this.props.recipeToDisplay.source_url}> Check out recipe here!</a>
+                                                    <a href={this.props.recipeToDisplay.source_url}>Check out recipe here!</a>
                                                 </span>
                                             </div>
                                         </div>

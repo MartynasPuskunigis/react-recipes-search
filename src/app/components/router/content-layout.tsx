@@ -11,7 +11,7 @@ import "./content-layout.css";
 
 export class ContentLayoutView extends React.Component {
     public componentDidMount(): void {
-        RecipesActionsCreators.searchForRecipes("");
+        RecipesActionsCreators.searchForRecipes();
     }
 
     public render(): JSX.Element | JSX.Element[] {
