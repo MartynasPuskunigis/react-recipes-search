@@ -39,7 +39,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
     public componentDidMount(): void {
         window.addEventListener(
             "scroll",
-            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),,
+            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),
             false
         );
     }

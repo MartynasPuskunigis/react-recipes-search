@@ -30,8 +30,8 @@ export class ActiveRecipeView extends React.Component<Props> {
                                 <a href={this.props.recipeToDisplay.source_url}>"Check out recipe here!"</a>
                             </span>
                         </p>
-                        {this.props.recipeToDisplay.ingredients.map(ingredient => (
-                            <div key={`ingredient-item-${ingredient}`}>{ingredient}</div>
+                        {this.props.recipeToDisplay.ingredients.map((ingredient, index) => (
+                            <div key={`ingredient-item-${ingredient}-${index}`}>{ingredient}</div>
                         ))}
                         <button className="active-recipe-button">
                             <Link to="/">Go Home</Link>
