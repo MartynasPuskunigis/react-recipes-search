@@ -1,9 +1,17 @@
 export class RecipesIdsFetchedAction {
-    constructor(private recipes: string[], private searchQuery: string) {}
+    constructor(private recipes: string[], private searchKeyword: string) {}
 
-    public get getSearchQuery(): string {
-        return this.searchQuery;
+    public get getSearchKeyword(): string {
+        return this.searchKeyword;
     }
+
+    public get getRecipes(): string[] {
+        return this.recipes;
+    }
+}
+
+export class LoadMoreRecipesAction {
+    constructor(private recipes: string[]) {}
 
     public get getRecipes(): string[] {
         return this.recipes;

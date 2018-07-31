@@ -4,7 +4,8 @@ import {
     RecipesIdsFetchedAction,
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
-    InvalidateEntireCache
+    InvalidateEntireCache,
+    LoadMoreRecipesAction
 } from "../actions/recipes-actions";
 
 interface StoreState {
@@ -24,26 +25,36 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
         this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
+        this.registerAction(LoadMoreRecipesAction, this.onLoadMoreRecipes.bind(this));
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
-        if (action.getRecipes.length !== 0) {
+        return {
+            ...state,
+            recipes: action.getRecipes,
+            status: Abstractions.ItemStatus.Loaded,
+            currentPage: 1,
+            moreRecipes: true,
+            searchKeyword: action.getSearchKeyword
+        };
+    }
+
+    private onLoadMoreRecipes(action: LoadMoreRecipesAction, state: StoreState): StoreState {
+        if (action.getRecipes.length === 0) {
             return {
                 ...state,
-                recipes: state.recipes.concat(action.getRecipes),
                 status: Abstractions.ItemStatus.Loaded,
-                searchKeyword: action.getSearchQuery,
-                currentPage: state.currentPage + 1
-            };
-        } else {
-            return {
-                ...state,
-                status: Abstractions.ItemStatus.Loaded,
-                searchKeyword: action.getSearchQuery,
                 currentPage: state.currentPage + 1,
                 moreRecipes: false
             };
         }
+
+        return {
+            ...state,
+            recipes: state.recipes.concat(action.getRecipes),
+            status: Abstractions.ItemStatus.Loaded,
+            currentPage: state.currentPage + 1
+        };
     }
 
     private onRecipesLoading(action: RecipesIdsLoadStartedAction, state: StoreState): StoreState {
