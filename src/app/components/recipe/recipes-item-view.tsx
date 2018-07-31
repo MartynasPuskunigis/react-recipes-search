@@ -67,7 +67,7 @@ export class RecipesItemView extends React.Component<Props> {
                 <div className="recipe-text">
                     <div className="recipe-header">
                         <div
-                            className={this.props.isFavorite ? "far fa-star star-icon-empty" : "fas fa-star star-icon-full"}
+                            className={this.props.isFavorite ? "fas fa-star star-icon-full" : "far fa-star star-icon-empty"}
                             /* Exclamation mark at this.props.recipe! because I am checking at the start of render method whether
                             this.props.recipe is undefined or null. */
                             onClick={event => this.handleFavoriteClick(event, this.props.recipe!.recipe_id)}

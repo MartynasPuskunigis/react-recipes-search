@@ -2,18 +2,19 @@
     .fav-recipes-banner {
         height: 200px;
         background: url("../../../assets/search-banner-background.jpg") center center no-repeat;
-        background-position: 0 -200px;
-        background-size: cover;
+        background-position: 50% calc(50% - 145px);
 
         .wrapper {
             background: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
 
             .banner-text {
                 font-size: 50px;
                 color: white;
+                line-height: normal;
             }
         }
     }
