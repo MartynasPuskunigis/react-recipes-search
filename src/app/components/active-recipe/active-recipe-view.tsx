@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { AppHistory } from "../router/app-history";
 import { Recipe } from "../../contracts/Recipe";
 
 import "./active-recipe-view.css";
@@ -12,6 +13,10 @@ export class ActiveRecipeView extends React.Component<Props> {
     public componentDidMount(): void {
         window.scrollTo(0, 0);
     }
+
+    private onGoBackClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        AppHistory.goBack();
+    };
 
     public render(): JSX.Element | JSX.Element[] {
         return (
@@ -47,6 +52,9 @@ export class ActiveRecipeView extends React.Component<Props> {
                                         </div>
                                     </div>
                                 </div>
+                                <button className="go-back" onClick={this.onGoBackClick}>
+                                    Go back
+                                </button>
                             </div>
                         </div>
                     </div>
