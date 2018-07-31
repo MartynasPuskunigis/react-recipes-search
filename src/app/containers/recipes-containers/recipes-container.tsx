@@ -10,6 +10,8 @@ import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
 
+const Y_POSITION_AT_BOTTOM_OF_PAGE = -635;
+
 interface State {
     recipesIds: string[];
     status: Abstractions.ItemStatus;
@@ -24,22 +26,20 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public static calculateState(state: State): State {
-        const { recipes, status, searchKeyword, currentPage, moreRecipes } = RecipesReduceStore.getState();
+        const { recipes, status, searchKeyword, currentPage, hasMoreRecipes } = RecipesReduceStore.getState();
         return {
             status: status,
             recipesIds: recipes,
             searchKeyword: searchKeyword,
             currentPage: currentPage,
-            moreRecipes: moreRecipes
+            moreRecipes: hasMoreRecipes
         };
     }
 
     public componentDidMount(): void {
         window.addEventListener(
             "scroll",
-            () => {
-                this.scrollHandler(this.state.searchKeyword, this.state.currentPage);
-            },
+            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),,
             false
         );
     }
@@ -47,16 +47,18 @@ class RecipesContainerClass extends React.Component<{}, State> {
     public componentWillUnmount(): void {
         window.removeEventListener(
             "scroll",
-            () => {
-                this.scrollHandler(this.state.searchKeyword, this.state.currentPage);
-            },
+            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),
             false
         );
     }
 
+    protected onScroll(searchKeyword: string, currentPage: number): void {
+        this.scrollHandler(searchKeyword, currentPage);
+    }
+
     public scrollHandler(searchKeyword: string, currentPage: number): void {
         if (
-            window.pageYOffset - document.body.scrollHeight === -635 &&
+            window.pageYOffset - document.body.scrollHeight === Y_POSITION_AT_BOTTOM_OF_PAGE &&
             this.state.status === Abstractions.ItemStatus.Loaded &&
             this.state.moreRecipes
         ) {

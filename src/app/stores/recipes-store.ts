@@ -15,7 +15,7 @@ interface StoreState {
     favoriteRecipes: string[];
     currentPage: number;
     searchKeyword: string;
-    moreRecipes: boolean;
+    hasMoreRecipes: boolean;
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -34,7 +34,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             recipes: action.getRecipes,
             status: Abstractions.ItemStatus.Loaded,
             currentPage: 1,
-            moreRecipes: true,
+            hasMoreRecipes: true,
             searchKeyword: action.getSearchKeyword
         };
     }
@@ -45,7 +45,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
                 ...state,
                 status: Abstractions.ItemStatus.Loaded,
                 currentPage: state.currentPage + 1,
-                moreRecipes: false
+                hasMoreRecipes: false
             };
         }
 
@@ -87,7 +87,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             favoriteRecipes: [],
             currentPage: 1,
             searchKeyword: "",
-            moreRecipes: true
+            hasMoreRecipes: true
         };
     }
 }
