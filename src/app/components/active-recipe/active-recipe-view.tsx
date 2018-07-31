@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { AppHistory } from "../router/app-history";
 import { Recipe } from "../../contracts/Recipe";
 
 import "./active-recipe-view.css";
@@ -12,6 +13,10 @@ export class ActiveRecipeView extends React.Component<Props> {
     public componentDidMount(): void {
         window.scrollTo(0, 0);
     }
+
+    private onGoBackClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        AppHistory.goBack();
+    };
 
     public render(): JSX.Element | JSX.Element[] {
         return (
@@ -34,18 +39,18 @@ export class ActiveRecipeView extends React.Component<Props> {
                                         ))}
                                     </div>
                                 </div>
-                                <div className="recipe-info">
-                                    <div className="wrapper">
-                                        <div className="active-recipe-publisher">
-                                            Publisher: <span>{this.props.recipeToDisplay.publisher}</span>
-                                        </div>
-                                        <div className="active-recipe-website">
-                                            Website:
-                                            <span>
-                                                <a href={this.props.recipeToDisplay.source_url}> Check out recipe here!</a>
-                                            </span>
+                                <div className="right-side">
+                                    <div className="recipe-info">
+                                        <div className="wrapper">
+                                            <div className="active-recipe-publisher">Publisher:{this.props.recipeToDisplay.publisher}</div>
+                                            <div className="active-recipe-website">
+                                                Website:<a href={this.props.recipeToDisplay.source_url}>Check out recipe here!</a>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button className="go-back" onClick={this.onGoBackClick}>
+                                        Go back
+                                    </button>
                                 </div>
                             </div>
                         </div>

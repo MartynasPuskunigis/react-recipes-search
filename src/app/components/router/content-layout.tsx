@@ -5,10 +5,15 @@ import { RecipesView } from "../recipe/recipes-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { PageNotFoundView } from "../notfound/page-not-found-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 import "./content-layout.css";
 
 export class ContentLayoutView extends React.Component {
+    public componentDidMount(): void {
+        RecipesActionsCreators.searchForRecipes();
+    }
+
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="content-layout">
