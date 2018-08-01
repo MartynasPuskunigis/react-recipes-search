@@ -39,7 +39,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
     public componentDidMount(): void {
         window.addEventListener(
             "scroll",
-            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),
+            this.onScrollHandler,
             false
         );
     }
@@ -47,22 +47,18 @@ class RecipesContainerClass extends React.Component<{}, State> {
     public componentWillUnmount(): void {
         window.removeEventListener(
             "scroll",
-            () => this.onScroll(this.state.searchKeyword, this.state.currentPage),
+            this.onScrollHandler,
             false
         );
     }
 
-    protected onScroll(searchKeyword: string, currentPage: number): void {
-        this.scrollHandler(searchKeyword, currentPage);
-    }
-
-    public scrollHandler(searchKeyword: string, currentPage: number): void {
+    protected onScrollHandler = (event: UIEvent) => {
         if (
             window.pageYOffset - document.body.scrollHeight === Y_POSITION_AT_BOTTOM_OF_PAGE &&
             this.state.status === Abstractions.ItemStatus.Loaded &&
             this.state.moreRecipes
         ) {
-            RecipesActionsCreators.loadMoreRecipes(searchKeyword, currentPage + 1);
+            RecipesActionsCreators.loadMoreRecipes(this.state.searchKeyword, this.state.currentPage + 1);
         }
     }
 
