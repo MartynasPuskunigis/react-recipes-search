@@ -1,4 +1,16 @@
 export class RecipesIdsFetchedAction {
+    constructor(private recipes: string[], private searchKeyword: string) {}
+
+    public get getSearchKeyword(): string {
+        return this.searchKeyword;
+    }
+
+    public get getRecipes(): string[] {
+        return this.recipes;
+    }
+}
+
+export class LoadMoreRecipesAction {
     constructor(private recipes: string[]) {}
 
     public get getRecipes(): string[] {
@@ -7,6 +19,8 @@ export class RecipesIdsFetchedAction {
 }
 
 export class RecipesIdsLoadStartedAction {}
+
+export class RecipeIdsLoadFailedAction {}
 
 export class ReassignActiveRecipeAction {
     constructor(private id: string) {}

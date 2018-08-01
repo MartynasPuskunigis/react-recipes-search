@@ -2,19 +2,20 @@ import { MapStore } from "simplr-flux";
 
 import { Recipe } from "../contracts/Recipe";
 import { API_KEY } from "../shared/apikey";
+import { RecipesActionsCreators } from "../actions/recipes-actions-creators";
 
 type RecipesDictionary = { [key: string]: Recipe };
 
 class RecipesMapStoreClass extends MapStore<Recipe> {
-    protected async requestData(keys: string[]): Promise<RecipesDictionary> {
+    protected async requestData(ids: string[]): Promise<RecipesDictionary> {
         const promises: Array<Promise<void>> = [];
         const postsDictionary: RecipesDictionary = {};
         try {
-            for (const key of keys) {
-                const promise = fetch(`https://cors-anywhere.herokuapp.com/food2fork.com/api/get?key=${API_KEY}&rId=${key}`)
+            for (const id of ids) {
+                const promise = fetch(RecipesActionsCreators.generateApiPath("get", API_KEY, undefined, undefined, id))
                     .then(data => data.json())
                     .then((data: { recipe: Recipe }) => {
-                        postsDictionary[key] = data.recipe;
+                        postsDictionary[id] = data.recipe;
                     });
                 promises.push(promise);
             }

@@ -12,13 +12,6 @@ interface Params {
 interface Props extends RouteComponentProps<Params> {}
 
 export class RecipesView extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            currentSearchQuery: ""
-        };
-    }
-
     public componentWillReceiveProps(props: Props): void {
         if (props.match.params.searchQuery != null) {
             RecipesActionsCreators.searchForRecipes(props.match.params.searchQuery);
@@ -30,6 +23,7 @@ export class RecipesView extends React.Component<Props> {
             RecipesActionsCreators.searchForRecipes(this.props.match.params.searchQuery);
         }
     }
+
     public render(): JSX.Element {
         return (
             <div className="recipes-view">

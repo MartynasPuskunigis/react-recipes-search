@@ -1,10 +1,12 @@
 import { ReduceStore, Abstractions } from "simplr-flux";
 
+import { RecipesMapStore } from "./recipes-map-store";
 import {
     RecipesIdsFetchedAction,
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
-    InvalidateEntireCache
+    InvalidateEntireCache,
+    LoadMoreRecipesAction
 } from "../actions/recipes-actions";
 
 interface StoreState {
@@ -12,6 +14,9 @@ interface StoreState {
     status: Abstractions.ItemStatus;
     activeRecipe: string;
     favoriteRecipes: string[];
+    currentPage: number;
+    searchKeyword: string;
+    hasMoreRecipes: boolean;
 }
 
 class RecipesReduceStoreClass extends ReduceStore<StoreState> {
@@ -21,13 +26,37 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
         this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
+        this.registerAction(LoadMoreRecipesAction, this.onLoadMoreRecipes.bind(this));
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
+        RecipesMapStore.InvalidateCacheMultiple(state.recipes);
+
         return {
             ...state,
-            recipes: [...action.getRecipes],
-            status: action.getRecipes.length !== 0 ? Abstractions.ItemStatus.Loaded : Abstractions.ItemStatus.NoData
+            recipes: action.getRecipes,
+            status: Abstractions.ItemStatus.Loaded,
+            currentPage: 1,
+            hasMoreRecipes: true,
+            searchKeyword: action.getSearchKeyword
+        };
+    }
+
+    private onLoadMoreRecipes(action: LoadMoreRecipesAction, state: StoreState): StoreState {
+        if (action.getRecipes.length === 0) {
+            return {
+                ...state,
+                status: Abstractions.ItemStatus.Loaded,
+                currentPage: state.currentPage + 1,
+                hasMoreRecipes: false
+            };
+        }
+
+        return {
+            ...state,
+            recipes: state.recipes.concat(action.getRecipes),
+            status: Abstractions.ItemStatus.Loaded,
+            currentPage: state.currentPage + 1
         };
     }
 
@@ -58,7 +87,10 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
             recipes: [],
             status: Abstractions.ItemStatus.Init,
             activeRecipe: "",
-            favoriteRecipes: []
+            favoriteRecipes: [],
+            currentPage: 1,
+            searchKeyword: "",
+            hasMoreRecipes: true
         };
     }
 }

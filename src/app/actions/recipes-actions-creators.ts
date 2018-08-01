@@ -6,24 +6,46 @@ import {
     ReassignActiveRecipeAction,
     AddRecipeToFavoriteListAction,
     RemoveRecipeFromFavoriteListAction,
-    InvalidateEntireCache
+    InvalidateEntireCache,
+    RecipeIdsLoadFailedAction,
+    LoadMoreRecipesAction
 } from "./recipes-actions";
 import { Recipes } from "../contracts/Recipes";
 import { API_KEY } from "../shared/apikey";
 
 export namespace RecipesActionsCreators {
-    export async function searchForRecipes(keyword?: string): Promise<void> {
-        if (keyword == null) {
-            keyword = "";
+    export function generateApiPath(searchType: string, apiKey: string, searchQuery?: string, page?: number, idToSearch?: string): string {
+        const apiPathBase = "https://cors-anywhere.herokuapp.com/food2fork.com/api/";
+        if (searchType === "search" && searchQuery != null && page != null && idToSearch == null) {
+            return `${apiPathBase}${searchType}?key=${apiKey}&q=${searchQuery}&page=${page}`;
+        } else {
+            return `${apiPathBase}${searchType}?key=${apiKey}&rId=${idToSearch}`;
         }
+    }
+
+    export async function searchForRecipes(keyword: string): Promise<void> {
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
-            const apiCall = await fetch(`https://cors-anywhere.herokuapp.com/food2fork.com/api/search?key=${API_KEY}&q=${keyword}&count=5`);
+            const recipeName = keyword;
+            const apiCall = await fetch(generateApiPath("search", API_KEY, recipeName, 1, undefined));
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
-            Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds));
+            Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds, keyword));
         } catch (error) {
-            console.error("Failed to search for recipe", error);
+            Dispatcher.dispatch(new RecipeIdsLoadFailedAction());
+        }
+    }
+
+    export async function loadMoreRecipes(keyword: string, pageToLoad: number): Promise<void> {
+        Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
+        try {
+            const recipeName = keyword;
+            const apiCall = await fetch(generateApiPath("search", API_KEY, recipeName, pageToLoad, undefined));
+            const response: Recipes = await apiCall.json();
+            const dataIds = await response.recipes.map(x => x.recipe_id);
+            Dispatcher.dispatch(new LoadMoreRecipesAction(dataIds));
+        } catch (error) {
+            Dispatcher.dispatch(new RecipeIdsLoadFailedAction());
         }
     }
 
