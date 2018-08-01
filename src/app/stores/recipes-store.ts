@@ -1,5 +1,6 @@
 import { ReduceStore, Abstractions } from "simplr-flux";
 
+import { RecipesMapStore } from "./recipes-map-store";
 import {
     RecipesIdsFetchedAction,
     RecipesIdsLoadStartedAction,
@@ -29,6 +30,8 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
+        RecipesMapStore.InvalidateCacheMultiple(state.recipes);
+
         return {
             ...state,
             recipes: action.getRecipes,

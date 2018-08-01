@@ -6,7 +6,6 @@ import { FavRecipesReduceStore } from "../../stores/fav-recipes-store";
 import { RecipesMapStore } from "../../stores/recipes-map-store";
 import { RecipesItemView } from "../../components/recipe/recipes-item-view";
 import { Recipe } from "../../contracts/Recipe";
-import { Spinner } from "../../spinner/spinner";
 
 interface Props {
     recipeId: string;
@@ -44,7 +43,7 @@ class FavRecipesItemContainerClass extends React.Component<Props, State> {
             }
             case Abstractions.ItemStatus.Init:
             case Abstractions.ItemStatus.Pending: {
-                return <Spinner />;
+                return <RecipesItemView />;
             }
             case Abstractions.ItemStatus.NoData: {
                 return <div>No data.</div>;

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 
+import { AppHistory } from "../router/app-history";
 import { Recipe } from "../../contracts/Recipe";
 
 import "./active-recipe-view.css";
@@ -10,32 +10,52 @@ interface Props {
 }
 
 export class ActiveRecipeView extends React.Component<Props> {
+    public componentDidMount(): void {
+        window.scrollTo(0, 0);
+    }
+
+    private onGoBackClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        AppHistory.goBack();
+    };
+
     public render(): JSX.Element | JSX.Element[] {
         return (
             <div className="active-recipe-view">
                 {this.props.recipeToDisplay != null && (
                     <div className="active-recipe">
+                        <div className="active-recipe-title">{this.props.recipeToDisplay.title}</div>
                         <img
                             className="active-recipe-img"
                             src={this.props.recipeToDisplay.image_url}
                             alt={this.props.recipeToDisplay.title}
                         />
-                        <h3 className="active-recipe-title">{this.props.recipeToDisplay.title}</h3>
-                        <h4 className="active-recipe-publisher">
-                            Publisher: <span>{this.props.recipeToDisplay.publisher}</span>
-                        </h4>
-                        <p className="active-recipe-website">
-                            Website:
-                            <span>
-                                <a href={this.props.recipeToDisplay.source_url}>"Check out recipe here!"</a>
-                            </span>
-                        </p>
-                        {this.props.recipeToDisplay.ingredients.map((ingredient, index) => (
-                            <div key={`ingredient-item-${ingredient}-${index}`}>{ingredient}</div>
-                        ))}
-                        <button className="active-recipe-button">
-                            <Link to="/">Go Home</Link>
-                        </button>
+                        <div className="recipe-details">
+                            <div className="wrapper">
+                                <div className="ingredients-box">
+                                    <div className="ingredients-list-header">The ingredients you will need</div>
+                                    <div className="ingredients-list">
+                                        {this.props.recipeToDisplay.ingredients.map(ingredient => (
+                                            <div key={`ingredient-item-${ingredient}-${this.props.recipeToDisplay.title}`}>
+                                                {ingredient}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="right-side">
+                                    <div className="recipe-info">
+                                        <div className="wrapper">
+                                            <div className="active-recipe-publisher">Publisher:{this.props.recipeToDisplay.publisher}</div>
+                                            <div className="active-recipe-website">
+                                                Website:<a href={this.props.recipeToDisplay.source_url}>Check out recipe here!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="go-back" onClick={this.onGoBackClick}>
+                                        Go back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

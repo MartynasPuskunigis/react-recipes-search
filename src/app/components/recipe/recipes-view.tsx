@@ -12,13 +12,13 @@ interface Params {
 interface Props extends RouteComponentProps<Params> {}
 
 export class RecipesView extends React.Component<Props> {
-
     public componentWillReceiveProps(props: Props): void {
         if (props.match.params.searchQuery != null) {
             RecipesActionsCreators.searchForRecipes(props.match.params.searchQuery);
         }
     }
     public componentDidMount(): void {
+        window.scrollTo(0, 0);
         if (this.props.match.params.searchQuery != null) {
             RecipesActionsCreators.searchForRecipes(this.props.match.params.searchQuery);
         }
