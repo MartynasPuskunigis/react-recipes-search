@@ -17,17 +17,22 @@ export namespace RecipesActionsCreators {
     export function generateApiPath(searchType: string, apiKey: string, searchQuery?: string, page?: number, idToSearch?: string): string {
         const apiPathBase = "https://cors-anywhere.herokuapp.com/food2fork.com/api/";
         if (searchType === "search" && searchQuery != null && page != null && idToSearch == null) {
+            if (searchQuery == null || searchQuery === "") {
+                return `${apiPathBase}${searchType}?key=${apiKey}&page=${page}`;
+            }
             return `${apiPathBase}${searchType}?key=${apiKey}&q=${searchQuery}&page=${page}`;
         } else {
             return `${apiPathBase}${searchType}?key=${apiKey}&rId=${idToSearch}`;
         }
     }
 
-    export async function searchForRecipes(keyword: string): Promise<void> {
+    export async function searchForRecipes(keyword?: string): Promise<void> {
+        if (keyword == null) {
+            keyword = "";
+        }
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
-            const recipeName = keyword;
-            const apiCall = await fetch(generateApiPath("search", API_KEY, recipeName, 1, undefined));
+            const apiCall = await fetch(generateApiPath("search", API_KEY, keyword, 1, undefined));
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
             Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds, keyword));
@@ -36,11 +41,13 @@ export namespace RecipesActionsCreators {
         }
     }
 
-    export async function loadMoreRecipes(keyword: string, pageToLoad: number): Promise<void> {
+    export async function loadMoreRecipes(pageToLoad: number, keyword?: string): Promise<void> {
+        if (keyword == null) {
+            keyword = "";
+        }
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
-            const recipeName = keyword;
-            const apiCall = await fetch(generateApiPath("search", API_KEY, recipeName, pageToLoad, undefined));
+            const apiCall = await fetch(generateApiPath("search", API_KEY, keyword, pageToLoad, undefined));
             const response: Recipes = await apiCall.json();
             const dataIds = await response.recipes.map(x => x.recipe_id);
             Dispatcher.dispatch(new LoadMoreRecipesAction(dataIds));

@@ -2,12 +2,14 @@ import * as React from "react";
 import { DebounceInput } from "react-debounce-input";
 
 import { AppHistory } from "../router/app-history";
+import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
 import "./search-view.css";
 
 export class SearchView extends React.Component {
     protected onSearchBoxActivated: React.ChangeEventHandler<HTMLInputElement> = event => {
         if (event.target.value !== "") {
+            RecipesActionsCreators.invalidateEntireCache();
             AppHistory.push({ pathname: `/recipes/${event.target.value}` });
         }
     };
