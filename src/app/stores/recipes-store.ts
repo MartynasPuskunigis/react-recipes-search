@@ -25,7 +25,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(RecipesIdsFetchedAction, this.onSearchBoxChanged.bind(this));
         this.registerAction(RecipesIdsLoadStartedAction, this.onRecipesLoading.bind(this));
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
-        this.registerAction(InvalidateEntireCache, this.onInvalidateEntireCache.bind(this));
+        this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
         this.registerAction(LoadMoreRecipesAction, this.onLoadMoreRecipes.bind(this));
     }
 
@@ -80,11 +80,6 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             ...state
         };
-    }
-
-    private onInvalidateEntireCache(action: ReassignActiveRecipeAction, state: StoreState): void {
-        this.cleanUpStore();
-        RecipesMapStore.InvalidateCacheMultiple(state.recipes);
     }
 
     public getInitialState(): StoreState {
