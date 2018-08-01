@@ -59,7 +59,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
             this.state.status === Abstractions.ItemStatus.Loaded &&
             this.state.moreRecipes
         ) {
-            RecipesActionsCreators.loadMoreRecipes(this.state.searchKeyword, this.state.currentPage + 1);
+            RecipesActionsCreators.loadMoreRecipes(this.state.currentPage + 1, this.state.searchKeyword);
         }
     }
 

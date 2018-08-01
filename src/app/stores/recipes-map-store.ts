@@ -12,7 +12,7 @@ class RecipesMapStoreClass extends MapStore<Recipe> {
         const postsDictionary: RecipesDictionary = {};
         try {
             for (const id of ids) {
-                const promise = fetch(RecipesActionsCreators.generateApiPath("get", API_KEY, undefined, undefined, id))
+                const promise = fetch(RecipesActionsCreators.generateApiPathForGet(API_KEY, id))
                     .then(data => data.json())
                     .then((data: { recipe: Recipe }) => {
                         postsDictionary[id] = data.recipe;
