@@ -17,6 +17,7 @@ export class RecipesView extends React.Component<Props> {
             RecipesActionsCreators.searchForRecipes(props.match.params.searchQuery);
         }
     }
+
     public componentDidMount(): void {
         window.scrollTo(0, 0);
         if (this.props.match.params.searchQuery != null) {

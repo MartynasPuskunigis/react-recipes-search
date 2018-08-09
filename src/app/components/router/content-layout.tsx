@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { RecipesView } from "../recipe/recipes-view";
 import { FavRecipesView } from "../fav-recipe/fav-recipes-view";
 import { PageNotFoundView } from "../notfound/page-not-found-view";
+import { AddMyRecipeView } from "../add-my-recipe/add-my-recipe-view";
 import { ActiveRecipeContainer } from "../../containers/active-recipe-container";
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
@@ -22,6 +23,7 @@ export class ContentLayoutView extends React.Component {
                     <Route path="/recipe/:id" component={ActiveRecipeContainer} />
                     <Route path="/favorites" component={FavRecipesView} />
                     <Route path="/recipes/:searchQuery" component={RecipesView} />
+                    <Route path="/add-my-recipe" component={AddMyRecipeView} />
                     <Route component={PageNotFoundView} />
                 </Switch>
             </div>

@@ -15,6 +15,9 @@ export class HeaderView extends React.Component {
                         <Link className="header-button" to="/favorites">
                             My favorites
                         </Link>
+                        <Link className="header-button" to="/add-my-recipe">
+                            Add my recipe
+                        </Link>
                     </div>
                 </div>
             </div>

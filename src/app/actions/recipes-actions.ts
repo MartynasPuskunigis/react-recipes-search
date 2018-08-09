@@ -47,3 +47,13 @@ export class RemoveRecipeFromFavoriteListAction {
 }
 
 export class InvalidateEntireCache {}
+
+export class AddNewRecipeStartedAction {}
+
+export class AddNewRecipeFinishedAction {
+    constructor(private id: string) {}
+
+    public get recipeId(): string {
+        return this.id;
+    }
+}

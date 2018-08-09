@@ -70,12 +70,12 @@ export class RecipesItemView extends React.Component<Props> {
                             className={this.props.isFavorite ? "fas fa-star star-icon-full" : "far fa-star star-icon-empty"}
                             /* Exclamation mark at this.props.recipe! because I am checking at the start of render method whether
                             this.props.recipe is undefined or null. */
-                            onClick={event => this.handleFavoriteClick(event, this.props.recipe!.recipe_id)}
+                            onClick={event => this.handleFavoriteClick(event, this.props.recipe!._id)}
                         />
-                        <a className="recipes-title" data-tip data-for={this.props.recipe.recipe_id}>
+                        <a className="recipes-title" data-tip data-for={this.props.recipe._id}>
                             {this.props.recipe.title}
                         </a>
-                        <ReactTooltip id={`${this.props.recipe.recipe_id}`} type="dark" effect="float">
+                        <ReactTooltip id={`${this.props.recipe._id}`} type="dark" effect="float">
                             <span>{this.props.recipe.title}</span>
                         </ReactTooltip>
                     </div>
@@ -83,7 +83,7 @@ export class RecipesItemView extends React.Component<Props> {
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
                 </div>
-                <Link to={`/recipe/${this.props.recipe.recipe_id}`} className="recipe-buttons">
+                <Link to={`/recipe/${this.props.recipe._id}`} className="recipe-buttons">
                     View Recipe
                 </Link>
             </div>
