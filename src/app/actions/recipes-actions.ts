@@ -1,3 +1,5 @@
+import { Recipe } from "../contracts/Recipe";
+
 export class RecipesIdsFetchedAction {
     constructor(private recipes: string[], private searchKeyword: string) {}
 
@@ -51,9 +53,29 @@ export class InvalidateEntireCache {}
 export class AddNewRecipeStartedAction {}
 
 export class AddNewRecipeFinishedAction {
+    constructor(private recipe: Recipe) {}
+
+    public get getRecipe(): Recipe {
+        return this.recipe;
+    }
+}
+
+export class DeleteRecipeStartedAction {}
+
+export class DeleteRecipeFinishedAction {
     constructor(private id: string) {}
 
     public get recipeId(): string {
         return this.id;
+    }
+}
+
+export class UpdateRecipeStartedAction {}
+
+export class UpdateRecipeFinishedAction {
+    constructor(private recipe: Recipe) {}
+
+    public get getRecipe(): Recipe {
+        return this.recipe;
     }
 }

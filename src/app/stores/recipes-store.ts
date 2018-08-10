@@ -6,7 +6,9 @@ import {
     RecipesIdsLoadStartedAction,
     ReassignActiveRecipeAction,
     InvalidateEntireCache,
-    LoadMoreRecipesAction
+    LoadMoreRecipesAction,
+    DeleteRecipeFinishedAction,
+    UpdateRecipeFinishedAction
 } from "../actions/recipes-actions";
 
 interface StoreState {
@@ -27,6 +29,8 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         this.registerAction(ReassignActiveRecipeAction, this.onViewRecipeClick.bind(this));
         this.registerAction(InvalidateEntireCache, this.cleanUpStore.bind(this));
         this.registerAction(LoadMoreRecipesAction, this.onLoadMoreRecipes.bind(this));
+        this.registerAction(DeleteRecipeFinishedAction, this.onDeletedRecipe.bind(this));
+        this.registerAction(UpdateRecipeFinishedAction, this.onUpdatedRecipe.bind(this));
     }
 
     private onSearchBoxChanged(action: RecipesIdsFetchedAction, state: StoreState): StoreState {
@@ -35,7 +39,7 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             ...state,
             recipes: action.getRecipes,
-            status: Abstractions.ItemStatus.Loaded,
+            status: action.getRecipes.length === 0 ? Abstractions.ItemStatus.NoData : Abstractions.ItemStatus.Loaded,
             currentPage: 1,
             hasMoreRecipes: true,
             searchKeyword: action.getSearchKeyword
@@ -80,6 +84,20 @@ class RecipesReduceStoreClass extends ReduceStore<StoreState> {
         return {
             ...state
         };
+    }
+
+    private onDeletedRecipe(action: DeleteRecipeFinishedAction, state: StoreState): StoreState {
+        RecipesMapStore.InvalidateCache(action.recipeId);
+        return {
+            ...state,
+            recipes: state.recipes.filter(x => x !== action.recipeId)
+        };
+    }
+
+    private onUpdatedRecipe(action: UpdateRecipeFinishedAction, state: StoreState): void {
+        if (action.getRecipe._id != null) {
+            RecipesMapStore.InvalidateCache(action.getRecipe._id);
+        }
     }
 
     public getInitialState(): StoreState {
