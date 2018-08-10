@@ -11,7 +11,7 @@ import { Spinner } from "../../spinner/spinner";
 
 import "./recipes-container.css";
 
-const Y_POSITION_AT_BOTTOM_OF_PAGE = -635;
+const Y_POSITION_AT_BOTTOM_OF_PAGE = -631;
 
 interface State {
     recipesIds: string[];
@@ -38,19 +38,11 @@ class RecipesContainerClass extends React.Component<{}, State> {
     }
 
     public componentDidMount(): void {
-        window.addEventListener(
-            "scroll",
-            this.onScrollHandler,
-            false
-        );
+        window.addEventListener("scroll", this.onScrollHandler, false);
     }
 
     public componentWillUnmount(): void {
-        window.removeEventListener(
-            "scroll",
-            this.onScrollHandler,
-            false
-        );
+        window.removeEventListener("scroll", this.onScrollHandler, false);
     }
 
     protected onScrollHandler = (event: UIEvent) => {
@@ -61,7 +53,7 @@ class RecipesContainerClass extends React.Component<{}, State> {
         ) {
             RecipesActionsCreators.loadMoreRecipes(this.state.currentPage + 1, this.state.searchKeyword);
         }
-    }
+    };
 
     private onRetryClick: React.MouseEventHandler<HTMLButtonElement> = event => {
         RecipesMapStore.InvalidateCacheMultiple(this.state.recipesIds);

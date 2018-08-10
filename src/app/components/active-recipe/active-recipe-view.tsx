@@ -9,6 +9,9 @@ interface Props {
     recipeToDisplay: Recipe;
 }
 
+// Hard coded ingredients because database doesn't have them yet.
+const ingredients = ["kale", "mustard", "bread"];
+
 export class ActiveRecipeView extends React.Component<Props> {
     public componentDidMount(): void {
         window.scrollTo(0, 0);
@@ -34,7 +37,7 @@ export class ActiveRecipeView extends React.Component<Props> {
                                 <div className="ingredients-box">
                                     <div className="ingredients-list-header">The ingredients you will need</div>
                                     <div className="ingredients-list">
-                                        {this.props.recipeToDisplay.ingredients.map(ingredient => (
+                                        {ingredients.map(ingredient => (
                                             <div key={`ingredient-item-${ingredient}-${this.props.recipeToDisplay.title}`}>
                                                 {ingredient}
                                             </div>

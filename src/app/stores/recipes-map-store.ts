@@ -1,8 +1,6 @@
 import { MapStore } from "simplr-flux";
 
 import { Recipe } from "../contracts/Recipe";
-import { API_KEY } from "../shared/apikey";
-import { RecipesActionsCreators } from "../actions/recipes-actions-creators";
 
 type RecipesDictionary = { [key: string]: Recipe };
 
@@ -12,12 +10,14 @@ class RecipesMapStoreClass extends MapStore<Recipe> {
         const postsDictionary: RecipesDictionary = {};
         try {
             for (const id of ids) {
-                const promise = fetch(RecipesActionsCreators.generateApiPathForGet(API_KEY, id))
-                    .then(data => data.json())
-                    .then((data: { recipe: Recipe }) => {
-                        postsDictionary[id] = data.recipe;
-                    });
-                promises.push(promise);
+                if (id !== "") {
+                    const promise = fetch(`http://127.0.0.1:3000/recipe/${id}`)
+                        .then(data => data.json())
+                        .then((data: Recipe) => {
+                            postsDictionary[id] = data;
+                        });
+                    promises.push(promise);
+                }
             }
             await Promise.all(promises);
         } catch (error) {

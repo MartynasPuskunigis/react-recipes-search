@@ -8,36 +8,31 @@ import {
     RemoveRecipeFromFavoriteListAction,
     InvalidateEntireCache,
     RecipeIdsLoadFailedAction,
-    LoadMoreRecipesAction
+    LoadMoreRecipesAction,
+    AddNewRecipeStartedAction,
+    AddNewRecipeFinishedAction,
+    DeleteRecipeStartedAction,
+    DeleteRecipeFinishedAction,
+    UpdateRecipeStartedAction,
+    UpdateRecipeFinishedAction
 } from "./recipes-actions";
-import { Recipes } from "../contracts/Recipes";
-import { API_KEY } from "../shared/apikey";
-
-const API_BASE_PATH = "https://cors-anywhere.herokuapp.com/food2fork.com/api/";
+import { Recipe } from "../contracts/Recipe";
 
 export namespace RecipesActionsCreators {
-    export function generateApiPathForSearch(apiKey: string, searchQuery: string, page: number): string {
-        const apiBasePathWithTypeAndKey = `${API_BASE_PATH}search?key=${apiKey}`;
-        if (searchQuery == null || searchQuery === "") {
-            return `${apiBasePathWithTypeAndKey}&page=${page}`;
-        }
-        return `${apiBasePathWithTypeAndKey}&q=${searchQuery}&page=${page}`;
-    }
-
-    export function generateApiPathForGet(apiKey: string, idToSearch: string): string {
-        const apiBasePathWithTypeAndKey = `${API_BASE_PATH}get?key=${apiKey}`;
-        return `${apiBasePathWithTypeAndKey}&rId=${idToSearch}`;
-    }
-
     export async function searchForRecipes(keyword?: string): Promise<void> {
         if (keyword == null) {
             keyword = "";
         }
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
-            const apiCall = await fetch(generateApiPathForSearch(API_KEY, keyword, 1));
-            const response: Recipes = await apiCall.json();
-            const dataIds = await response.recipes.map(x => x.recipe_id);
+            const apiCall = await fetch(`http://127.0.0.1:3000/recipe?q=${keyword}&page=1`);
+            const response: Recipe[] = await apiCall.json();
+            const dataIds: string[] = await response.map(x => {
+                if (x._id != null) {
+                    return x._id;
+                }
+                return "";
+            });
             Dispatcher.dispatch(new RecipesIdsFetchedAction(dataIds, keyword));
         } catch (error) {
             Dispatcher.dispatch(new RecipeIdsLoadFailedAction());
@@ -50,9 +45,14 @@ export namespace RecipesActionsCreators {
         }
         Dispatcher.dispatch(new RecipesIdsLoadStartedAction());
         try {
-            const apiCall = await fetch(generateApiPathForSearch(API_KEY, keyword, pageToLoad));
-            const response: Recipes = await apiCall.json();
-            const dataIds = await response.recipes.map(x => x.recipe_id);
+            const apiCall = await fetch(`http://127.0.0.1:3000/recipe?q=${keyword}&page=${pageToLoad}`);
+            const response: Recipe[] = await apiCall.json();
+            const dataIds: string[] = await response.map(x => {
+                if (x._id != null) {
+                    return x._id;
+                }
+                return "";
+            });
             Dispatcher.dispatch(new LoadMoreRecipesAction(dataIds));
         } catch (error) {
             Dispatcher.dispatch(new RecipeIdsLoadFailedAction());
@@ -75,5 +75,43 @@ export namespace RecipesActionsCreators {
 
     export function invalidateEntireCache(): void {
         Dispatcher.dispatch(new InvalidateEntireCache());
+    }
+
+    export function addNewRecipe(recipeToAdd: Recipe): void {
+        Dispatcher.dispatch(new AddNewRecipeStartedAction());
+        fetch("http://127.0.0.1:3000/recipe", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recipeToAdd)
+        });
+        Dispatcher.dispatch(new AddNewRecipeFinishedAction(recipeToAdd));
+    }
+
+    export function deleteRecipe(recipeId: string): void {
+        Dispatcher.dispatch(new DeleteRecipeStartedAction());
+        fetch(`http://127.0.0.1:3000/recipe/${recipeId}`, {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        });
+        Dispatcher.dispatch(new DeleteRecipeFinishedAction(recipeId));
+    }
+
+    export function updateRecipe(recipeToUpdate: Recipe): void {
+        Dispatcher.dispatch(new UpdateRecipeStartedAction());
+        fetch(`http://127.0.0.1:3000/recipe/${recipeToUpdate._id}`, {
+            method: "PUT",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recipeToUpdate)
+        });
+        Dispatcher.dispatch(new UpdateRecipeFinishedAction(recipeToUpdate));
     }
 }

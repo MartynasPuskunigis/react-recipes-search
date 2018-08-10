@@ -10,7 +10,7 @@
     },
     "ServerConfig": {
         "Ip": "127.0.0.1",
-        "Port": 3000,
+        "Port": 3001,
         "LiveReloadPort": 3400
     },
     "BundleConfig": {
