@@ -59,10 +59,18 @@ export class AddMyRecipeView extends React.Component<{}, State> {
             <div className="add-my-recipe-view">
                 <div className="wrapper">
                     <div className="input-fields">
-                        <input onChange={this.onCurrentTitleInputChange} type="text" placeholder="Recipe title" />
-                        <input onChange={this.onCurrentNameInputChange} type="text" placeholder="Your name" />
-                        <input onChange={this.onCurrentUrlInputChange} type="text" placeholder="Image url" />
-                        <input onChange={this.onCurrentInstructionInputChange} type="text" placeholder="Recipe instructions" />
+                        <div className="input-field">
+                            <input onChange={this.onCurrentTitleInputChange} type="text" placeholder="Recipe title" />
+                        </div>
+                        <div className="input-field">
+                            <input onChange={this.onCurrentNameInputChange} type="text" placeholder="Your name" />
+                        </div>
+                        <div className="input-field">
+                            <input onChange={this.onCurrentUrlInputChange} type="text" placeholder="Image url" />
+                        </div>
+                        <div className="input-field">
+                            <input onChange={this.onCurrentInstructionInputChange} type="text" placeholder="Recipe instructions" />
+                        </div>
                     </div>
                     <button onClick={this.onSubmitClick} className="submit-button">
                         Submit my recipe

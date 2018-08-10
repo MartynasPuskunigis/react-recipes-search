@@ -5,6 +5,8 @@ import { SearchView } from "../search/search-view";
 import { RecipesContainer } from "../../containers/recipes-containers/recipes-container";
 import { RecipesActionsCreators } from "../../actions/recipes-actions-creators";
 
+import "./recipes-view.css";
+
 interface Params {
     searchQuery: string;
 }

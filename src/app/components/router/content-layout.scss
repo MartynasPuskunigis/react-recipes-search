@@ -1,5 +1,8 @@
 $height-to-fit-footer-on-page: 107px;
 
 .content-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: calc(100vh - #{$height-to-fit-footer-on-page});
 }

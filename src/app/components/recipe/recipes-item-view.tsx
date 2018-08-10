@@ -176,14 +176,16 @@ export class RecipesItemView extends React.Component<Props, State> {
                         Publisher: <span>{this.props.recipe.publisher}</span>
                     </p>
                 </div>
-                <button
-                    /* Exclamation mark at this.props.recipe! because I am checking at the start of render
+                <div className="edit-delete">
+                    <button
+                        /* Exclamation mark at this.props.recipe! because I am checking at the start of render
                      method whether this.props.recipe is undefined or null. */
-                    onClick={event => this.onDeleteClick(event, this.props.recipe!._id!)}
-                >
-                    Delete
-                </button>
-                <button onClick={this.onEditClick}>Edit</button>
+                        onClick={event => this.onDeleteClick(event, this.props.recipe!._id!)}
+                    >
+                        Delete
+                    </button>
+                    <button onClick={this.onEditClick}>Edit</button>
+                </div>
                 <Link to={`/recipe/${this.props.recipe._id}`} className="recipe-buttons">
                     View Recipe
                 </Link>

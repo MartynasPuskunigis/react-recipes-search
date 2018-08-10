@@ -66,6 +66,32 @@
         }
     }
 
+    .edit-delete {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+
+        button {
+            border: solid 2px #e74c3c;
+            background: transparent;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            transition-duration: 400ms;
+            color: #e74c3c;
+            outline: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e74c3c;
+                color: black;
+            }
+        }
+    }
+
     .recipe-buttons {
         border: solid 2px #e74c3c;
         background: transparent;
